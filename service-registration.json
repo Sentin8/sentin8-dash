@@ -1,0 +1,66 @@
+{
+  "vertical": "sentin8",
+  "services": [],
+  "apps": [
+    {
+      "slug": "dash",
+      "web_dir": "build/web",
+      "listing": {
+        "app_name": "Sentin8:Dash",
+        "app_slug": "dash",
+        "description": "Sentin8 operator dashboard — platform administration, org/env management, service monitoring, and app store management.",
+        "backend_url": "",
+        "supports_dcr": false,
+        "visibility": "public",
+        "status": "published",
+        "auth_mode": "staff",
+        "oauth_defaults": {
+          "grant_types": [
+            "authorization_code",
+            "refresh_token"
+          ],
+          "response_types": [
+            "code"
+          ],
+          "token_endpoint_auth_method": "none",
+          "scopes": [
+            "openid",
+            "profile",
+            "email",
+            "sentin8:auth:user:read",
+            "sentin8:auth:user:write",
+            "sentin8:auth:admin:read",
+            "sentin8:auth:admin:write",
+            "sentin8:dash:org:create",
+            "sentin8:dash:org:write",
+            "sentin8:dash:env:create",
+            "sentin8:app:store:read",
+            "sentin8:app:store:admin",
+            "sentin8:app:instances:read",
+            "sentin8:app:instances:write",
+            "sentin8:app:instances:admin",
+            "sentin8:db:data:read",
+            "sentin8:db:data:write",
+            "sentin8:db:table:admin",
+            "sentin8:db:posture:read",
+            "sentin8:storage:env:read",
+            "sentin8:storage:env:write",
+            "sentin8:storage:env:admin",
+            "sentin8:bus:admin",
+            "sentin8:bus:produce",
+            "sentin8:bus:consume",
+            "sentin8:cron:policy:read",
+            "sentin8:cron:policy:write",
+            "sentin8:flow:policy:read",
+            "sentin8:flow:policy:write",
+            "sentin8:func:policy:write",
+            "sentin8:post:policy:read",
+            "sentin8:post:policy:write",
+            "sentin8:stat:measure"
+          ],
+          "consent_required": false
+        }
+      }
+    }
+  ]
+}

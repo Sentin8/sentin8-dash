@@ -1,4 +1,4 @@
-# BUSINESS.md: Sentin8 Dash — Business Requirements & Functionality
+# Sentin8 Dash — Business Requirements & Functionality
 
 > Audience: product owners, business analysts, and anyone evaluating what the
 > Sentin8 operator console **does for the business**. For architecture read

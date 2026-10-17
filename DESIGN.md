@@ -1,4 +1,4 @@
-# DESIGN.md: Sentin8 Dash — Detailed Design Document
+# Sentin8 Dash — Detailed Design Document
 
 > Audience: maintainers, reviewers, and architects modifying the operator
 > console. For the overview read `dash/README.md`; for the business view read

@@ -8,7 +8,7 @@
       "listing": {
         "app_name": "Sentin8:Dash",
         "app_slug": "dash",
-        "description": "Sentin8 operator dashboard — platform administration, org/env management, service monitoring, and app store management.",
+        "description": "Sentin8 operator dashboard - platform administration, org/env management, service monitoring, and app store management.",
         "backend_url": "",
         "supports_dcr": false,
         "visibility": "public",

@@ -1,4 +1,4 @@
-# README.md: Sentin8 Dash — Operator Dashboard (Overview)
+# README.md: Sentin8 Dash - Operator Dashboard (Overview)
 
 > Audience: anyone evaluating or onboarding to the Sentin8 operator console.
 > For wire-level detail read `DESIGN.md`; for the business view read
@@ -9,8 +9,8 @@
 `apps/dash` is the platform's operator and tenant-facing Flutter Web console.
 It is the human front end for the platform's organization model: signing in
 through Sentin8:BFF, creating and governing organizations and environments,
-toggling services, editing tenant branding, auditing activity, and —
-principally — hosting every service's **Remote UI (RFW) admin pages** through
+toggling services, editing tenant branding, auditing activity, and -
+principally - hosting every service's **Remote UI (RFW) admin pages** through
 a generic renderer. Dash holds zero compile-time knowledge of any vertical or
 service: the navigation tree and all service admin screens arrive at runtime
 from `GET /v1/verticals/services` and `GET /v1/admin/ui/{page}`, so a new
@@ -25,7 +25,7 @@ service with admin pages appears in the console without touching this code.
   any registered vertical's surfaces purely from runtime metadata, keeping the
   vertical dependency direction strictly one-way (sentin8 ← verticals).
 - **Tokens never in the browser.** All traffic goes through the BFF proxy with
-  a session cookie — the app never holds or refreshes OAuth tokens, and every
+  a session cookie - the app never holds or refreshes OAuth tokens, and every
   mutation carries CSRF and tenant-target headers.
 - **Operator ergonomics.** A stable shell (collapsible rail, breadcrumbs,
   scope tabs, live navigation) so operators manage multi-org, multi-env setups
@@ -44,9 +44,9 @@ graph TD
     subgraph Browser["Browser (dash instance origin)"]
         SHELL["DashShell<br/>rail · breadcrumbs · scope tabs"]
         PAGES["Hash-route pages<br/>bootstrap · org/env lifecycle · settings · branding · audit"]
-        RFW["RfwPage — generic RFW host"]
+        RFW["RfwPage - generic RFW host"]
         API["ApiClient (browser fetch)<br/>CSRF + tenant-target headers"]
-        WS["BffWebSocket — live events"]
+        WS["BffWebSocket - live events"]
         AUTH["AuthProvider (session init/refresh)"]
     end
     subgraph BFF["Sentin8:BFF"]
@@ -68,7 +68,7 @@ graph TD
   catch-all route (`#/{service}/{page}`) renders any service's admin UI.
 - **Client-side gating** (`RlsGuard`) is UX-only: route-level checks for
   session, org membership, env existence, and feature enablement keep the
-  operator away from screens they cannot use — the backend remains the
+  operator away from screens they cannot use - the backend remains the
   authorization authority.
 
 ## 4. Key Traits and Data Structures
@@ -82,7 +82,7 @@ graph TD
   named client per platform service (`auth, sys, db, storage, app, bus, stat,
   func, cron, flow, log`), and a `scoped()` copy for org/env-targeted calls.
 * `RfwPage` + SDK `RfwRenderer` / `RfwActions` (`rfw/rfw_page.dart`): the
-  remote-UI host — loads page definitions, renders containers/tables/forms,
+  remote-UI host - loads page definitions, renders containers/tables/forms,
   executes admin actions, resolves service tabs, and host-registers native
   widgets (`policy_simulator`).
 * `RlsGuard` (`rls_guard.dart`): client-side route gate resolving
@@ -90,7 +90,7 @@ graph TD
   targeted retry windows for identity/tls propagation delays.
 * `BffWebSocket` (`bff_ws.dart`): live domain-event subscription channel with
   exponential reconnect, feeding live list updates.
-* `DashShell` (`nav_shell.dart`): the persistent shell — dynamic nav tree
+* `DashShell` (`nav_shell.dart`): the persistent shell - dynamic nav tree
   from `GET /v1/verticals/services`, breadcrumbs, scope tabs, user menu.
 * Design system (`theme.dart`, `theme/design_system.dart`): Royal Gold accent,
   glass panels, 4px grid, Quicksand typography; shared widgets (`ScopeSelector`,
@@ -105,16 +105,16 @@ graph TD
 * **Generic RFW renderer as the primary admin surface.** One renderer serves
   every current and future service; the cost is a rich definition schema and
   data-normalization layer, repaid by eliminating per-service client work.
-  Rejected alternative: hand-written admin pages per service — permanently
+  Rejected alternative: hand-written admin pages per service - permanently
   coupled to every vertical (violates zero-compile-time-vertical-knowledge).
 * **BFF cookie sessions over in-app token handling.** The BFF owns PKCE,
   token exchange, and transparent refresh; the client avoids all token
   lifecycle risk. Rejected alternative: Authorization-code-with-PKCE in the
-  browser — tokens would live client-side.
+  browser - tokens would live client-side.
 * **Runtime URL derivation from the hostname.** One build serves every dash
   instance (`bff.{host}` is the only external URL built), matching the
   platform's dynamic domain hierarchy. Rejected alternative: build-time
-  `--dart-define` endpoints — would require per-instance builds.
+  `--dart-define` endpoints - would require per-instance builds.
 * **Hash routing over a router package.** Static hosting without server
   rewrite rules must serve every deep link from the same `index.html`; hash
   routes make the served file the single entry point. Trade-off: URLs carry a
@@ -123,7 +123,7 @@ graph TD
 * **Client-side `RlsGuard` as UX only.** Guard checks rely on the same
   endpoints the operations use, with generous retries for propagation races;
   backend RLS/authorization remains the enforcement point. Rejected
-  alternative: trusting client-side guards for security — rejected by design.
+  alternative: trusting client-side guards for security - rejected by design.
 * **Duplicate theme tokens (`hide` SDK colors) instead of SDK theming.** Dash
   predates the shared Flutter SDK's full token set; it imports the SDK for the
   RFW machinery and hides the theme to keep its tuned look. Unified theming is
@@ -135,13 +135,13 @@ graph TD
   - `X-BFF-Target-Env-Id` and `X-BFF-Target-Org-Id` are mutually exclusive;
     env wins whenever an env scope exists (target headers are duplicated into
     query params as a CORS-preflight-stripping workaround).
-  - The BFF base URL is always `https://bff.` + current hostname — the only
+  - The BFF base URL is always `https://bff.` + current hostname - the only
     cross-host authority the app builds; no other backend is addressable.
   - Every mutating request carries `X-BFF-CSRF`.
   - RFW rendering is POST-only for mutations, per the platform renderer
     contract.
   - The nav tree and admin pages come exclusively from runtime service
-    metadata — no service name is ever hardcoded into a route or widget.
+    metadata - no service name is ever hardcoded into a route or widget.
   - Correlation ids ride on every request; session teardown occurs on
     authentication-family errors during bootstrap.
   - Unknown fetch failures in guard checks default to *allow*, deferring to
@@ -158,7 +158,7 @@ graph TD
   `middleware/rls_middleware.dart`), duplicate shell pages
   (`org_*`, `env_*`, `left_rail.dart`, `right_insight_panel.dart`,
   `widgets/metrics_table.dart`), and rich native app-store/instance pages are
-  compiled but unreachable from the active router — consolidation (delete vs.
+  compiled but unreachable from the active router - consolidation (delete vs.
   promote) is pending a product decision.
 - **Event transport mismatch.** `BffWebSocket` subscribes for domain events on
   `/ws`, which the BFF documentation assigns to the chat tier; the SSE

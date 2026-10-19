@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 name: dash
-description: Sentin8 operator dashboard — Flutter Web application.
+description: Sentin8 operator dashboard - Flutter Web application.
 publish_to: "none"
 version: 0.1.0
 

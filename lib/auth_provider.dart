@@ -39,7 +39,7 @@ class AuthProvider extends ChangeNotifier {
   // _currentHost / _inferSentin8Domain / _inferBffBaseUrl). dash constructs
   // exactly ONE external URL — `bff.{current host}` — and routes every
   // other service (auth sign-up/sign-out, …) THROUGH BFF, so there are no
-  // hardcoded `sentin8.local` / `bff.dash.ops.sys` / `auth.*` literals.
+  // hardcoded `local.sentin8.dev` / `bff.dash.ops.sys` / `auth.*` literals.
   String _sentin8Domain = _inferSentin8Domain();
   String _bffBaseUrl = _inferBffBaseUrl();
   String? _csrfToken;
@@ -53,13 +53,13 @@ class AuthProvider extends ChangeNotifier {
   String? get csrfToken => _csrfToken;
   String get bffBaseUrl => _bffBaseUrl;
   int get featureVersion => _featureVersion;
-  /// The Sentin8 root domain (e.g. "sentin8.local") inferred from the current
+  /// The Sentin8 root domain (e.g. "local.sentin8.dev") inferred from the current
   /// window hostname. Used by pages that need to construct org/env domains.
   String get sentin8Domain => _sentin8Domain;
 
   /// Compute the org's root domain from its slug and optional custom domain.
   /// - If `customDomain` is set, use it as-is.
-  /// - Otherwise, return `{slug}.{sentin8Domain}` (e.g. `ibank.sentin8.local`).
+  /// - Otherwise, return `{slug}.{sentin8Domain}` (e.g. `ibank.local.sentin8.dev`).
   String orgDomain({required String slug, String? customDomain}) {
     if (customDomain != null && customDomain.isNotEmpty) return customDomain;
     return '$slug.$_sentin8Domain';
@@ -75,7 +75,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   /// The hostname dash is currently served from (e.g.
-  /// `sentin8-dash.ops.sys.sentin8.local`, `dash.ops.ibank.sentin8.local`). All
+  /// `sentin8-dash.ops.sys.local.sentin8.dev`, `dash.ops.ibank.local.sentin8.dev`). All
   /// scope-dependent URLs are derived from this so one build runs on
   /// platform / org / env dash instances. Empty outside a browser (unit
   /// tests) — inject via `init(sentin8Domain: ...)` then.
@@ -88,7 +88,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   /// Sentin8 root domain derived from the current hostname
-  /// (`sentin8-dash.ops.sys.sentin8.local` → `sentin8.local`). Empty if unknown.
+  /// (`sentin8-dash.ops.sys.local.sentin8.dev` → `local.sentin8.dev`). Empty if unknown.
   static String _inferSentin8Domain() {
     final host = _currentHost();
     if (host.isEmpty) return '';

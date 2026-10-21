@@ -61,7 +61,7 @@ class _OrganizationSettingsPageState extends State<OrganizationSettingsPage> {
   }
 
   /// The default org domain is computed server-side as
-  /// `{slug}.{sentin8_domain}` (e.g. `ibank.sentin8.local`).
+  /// `{slug}.{sentin8_domain}` (e.g. `ibank.local.sentin8.dev`).
   String? get _defaultDomain {
     final slug = _org?['slug'] as String?;
     if (slug == null || slug.isEmpty) return null;
@@ -99,7 +99,7 @@ class _OrganizationSettingsPageState extends State<OrganizationSettingsPage> {
   }
 
   /// Restore the org domain to the server-computed default
-  /// (`{slug}.sentin8.local`) by clearing the domain field.
+  /// (`{slug}.local.sentin8.dev`) by clearing the domain field.
   Future<void> _restoreDefaultDomain() async {
     _domainCtrl.text = '';
     await _saveDomain();

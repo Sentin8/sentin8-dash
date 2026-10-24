@@ -1,4 +1,4 @@
-# README.md: Sentin8 Dash - Operator Dashboard (Overview)
+# Sentin8 Dash - Operator Dashboard (Overview)
 
 > Audience: anyone evaluating or onboarding to the Sentin8 operator console.
 > For wire-level detail read `DESIGN.md`; for the business view read

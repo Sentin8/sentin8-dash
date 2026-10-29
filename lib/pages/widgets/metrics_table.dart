@@ -15,10 +15,10 @@ import '../../auth_provider.dart';
 import '../../bff_ws.dart';
 
 /// SLO thresholds for status coloring.
-const _kErrorRateWarn = 1.0; // % — yellow band
-const _kErrorRateCritical = 5.0; // % — red
-const _kP95WarnMs = 500; // ms — yellow band
-const _kP95CriticalMs = 2000; // ms — red
+const _kErrorRateWarn = 1.0; // %  -  yellow band
+const _kErrorRateCritical = 5.0; // %  -  red
+const _kP95WarnMs = 500; // ms  -  yellow band
+const _kP95CriticalMs = 2000; // ms  -  red
 
 /// A self-contained metrics table that:
 /// 1. Fetches initial data via HTTP from Stat `/v1/data/traffic`

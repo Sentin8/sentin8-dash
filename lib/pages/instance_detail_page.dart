@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Instance detail page — admin view of an App instance.
+// Instance detail page - admin view of an App instance.
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 import '../theme.dart';
@@ -64,8 +64,8 @@ class _InstanceDetailPageState extends State<InstanceDetailPage> {
                   children: [
                     _DetailRow(label: 'Instance ID', value: widget.instanceId),
                     _DetailRow(label: 'Status', value: _instance!['status'] as String? ?? 'unknown'),
-                    _DetailRow(label: 'Custom Domain', value: _instance!['custom_domain'] as String? ?? '—'),
-                    _DetailRow(label: 'Listing ID', value: _instance!['listing_id'] as String? ?? '—'),
+                    _DetailRow(label: 'Custom Domain', value: _instance!['custom_domain'] as String? ?? ' - '),
+                    _DetailRow(label: 'Listing ID', value: _instance!['listing_id'] as String? ?? ' - '),
                     const SizedBox(height: Sentin8Spacing.lg),
                     FilledButton.icon(
                       onPressed: () {

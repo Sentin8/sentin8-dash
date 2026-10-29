@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Dash — BFF WebSocket client (Story 12.4.24)
+// Dash - BFF WebSocket client (Story 12.4.24)
 //
 // Connects to BFF /ws for real-time log alerts, metrics, and live map updates.
 // Subscribes to sentin8:log.alert.* and sentin8:stat.alert.* events pushed by BFF's Bus

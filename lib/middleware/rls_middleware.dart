@@ -13,7 +13,7 @@ import 'package:flutter/widgets.dart';
 /// The result of an RLS guard check.
 class RlsCheckResult {
   /// True when the user is a member of [orgId] (org-scoped) or has a
-  /// role/group in [envId] (env-scoped). env_id is globally unique —
+  /// role/group in [envId] (env-scoped). env_id is globally unique  - 
   /// org_id is resolved server-side from env_id.
   final bool allowed;
   /// Optional redirect location when [allowed] is false.

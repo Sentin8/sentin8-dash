@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Environment creation — `/org/{orgId}/env/create` (Story 13.1.11).
+// Environment creation - `/org/{orgId}/env/create` (Story 13.1.11).
 
 import 'package:flutter/material.dart';
 

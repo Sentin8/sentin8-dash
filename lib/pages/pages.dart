@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8 Dash pages — barrel export for all page widgets.
+// Sentin8 Dash pages - barrel export for all page widgets.
 export 'sign_in_page.dart';
 export 'sign_out_page.dart';
 export 'auth_callback_page.dart';

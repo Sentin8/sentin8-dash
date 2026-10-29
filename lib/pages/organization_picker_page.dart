@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Organization picker page — lists organizations the user belongs to.
+// Organization picker page - lists organizations the user belongs to.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../auth_provider.dart';

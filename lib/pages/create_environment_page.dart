@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Create environment page — form for creating a new environment.
+// Create environment page - form for creating a new environment.
 // The env subdomain (slug) is auto-generated from the environment name
 // (e.g. "Production" → "prod"). The full env domain is shown as a
 // fixed, read-only suffix in the subdomain field, derived from the org's
@@ -149,24 +149,24 @@ class _CreateEnvironmentPageState extends State<CreateEnvironmentPage> {
     }
   }
 
-  /// The full env domain — used in the read-only display so the user
+  /// The full env domain - used in the read-only display so the user
   /// sees the entire hostname they'll get.
   ///   custom org domain (no `.o.`): `{subdomain}.{orgDomain}`
   ///   default org domain:           `{subdomain}.e.{orgDomain}`
-  /// When the env name is empty, the slug is unknown — return the
+  /// When the env name is empty, the slug is unknown - return the
   /// fixed suffix (e.g. `.ibank.local`) instead of using a placeholder
   /// like `prod`, so we don't show a misleading hostname.
   String get _fullEnvDomain {
     if (_orgDomain.isEmpty) return '';
     final slug = _subdomainCtrl.text.trim();
     if (slug.isEmpty) {
-      // No name yet — just show the org-derived suffix.
+      // No name yet - just show the org-derived suffix.
       return _envDomainSuffix;
     }
     return AuthProvider.instance.envDomain(orgDomain: _orgDomain, envSlug: slug);
   }
 
-  /// The fixed (non-editable) part of the env domain — the env domain
+  /// The fixed (non-editable) part of the env domain - the env domain
   /// with the editable subdomain prefix stripped off. e.g. for
   /// "staging.ibank.local" with slug "staging", returns ".ibank.local".
   /// Starts with a leading `.` so it can be used directly as a
@@ -215,7 +215,7 @@ class _CreateEnvironmentPageState extends State<CreateEnvironmentPage> {
                   state: _subdomainField,
                   // Show the full env domain so the user sees the
                   // entire hostname they'll get. The slug is already
-                  // embedded in it — no need to repeat it.
+                  // embedded in it - no need to repeat it.
                   value: _fullEnvDomain,
                   // Suffix is the env domain MINUS the slug the user
                   // is editing. The slug is editable; the rest of the

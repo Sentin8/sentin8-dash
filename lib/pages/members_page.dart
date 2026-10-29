@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Member management — `/org/{orgId}/members` (Story 13.1.10).
+// Member management - `/org/{orgId}/members` (Story 13.1.10).
 
 import 'package:flutter/material.dart';
 

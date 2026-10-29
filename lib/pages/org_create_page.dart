@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Organization creation flow — `/org/create` (Story 13.1.7).
+// Organization creation flow - `/org/create` (Story 13.1.7).
 
 import 'package:flutter/material.dart';
 

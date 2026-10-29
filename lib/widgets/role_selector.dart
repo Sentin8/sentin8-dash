@@ -3,12 +3,12 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// RoleSelector — autocomplete + add-or-create editor for app-declared
+// RoleSelector - autocomplete + add-or-create editor for app-declared
 // security roles.
 //
 // Each role is a row with:
 //   * Name (text input with autocomplete suggestions from the
-//     server's existing roles — `auth_roles` in the target
+//     server's existing roles - `auth_roles` in the target
 //     org/env).
 //   * Optional description (single-line text input).
 //   * A nested [ScopeSelector] for the role's granted scopes.
@@ -29,7 +29,7 @@
 //   └────────────────────────────────────────────────────────────┘
 //
 // The optional trailing `*` on a role name (e.g. `ebank-customer*`)
-// marks the role as the **default signup role** — new users
+// marks the role as the **default signup role** - new users
 // registering via this app are auto-assigned to it. We preserve the
 // marker across edits so the parent's serializer can emit the
 // `default_signup_role` field separately.
@@ -103,7 +103,7 @@ class RoleSelector extends StatefulWidget {
   final List<String>? scopeSuggestions;
 
   /// Optional async fetcher forwarded to the nested [ScopeSelector]s.
-  /// See [ScopeSelector.fetchSuggestions] — typically points to
+  /// See [ScopeSelector.fetchSuggestions] - typically points to
   /// `Sentin8Services.fetchScopeCatalog` to source the platform
   /// scope catalog from sys.
   final Future<List<String>> Function()? fetchScopeSuggestions;
@@ -149,9 +149,9 @@ class RoleSelector extends StatefulWidget {
 
   /// Optional list of pre-existing role names to offer in the
   /// `Includes` picker.  When null (the default) the picker only
-  /// shows roles defined *above* the current row — the listing
+  /// shows roles defined *above* the current row - the listing
   /// use case.  When non-null, the picker shows these names
-  /// instead — useful for the auth use case where the user
+  /// instead - useful for the auth use case where the user
   /// creates a single new role and wants to include
   /// pre-existing roles whose permissions should be merged.
   final List<String>? includeSuggestions;
@@ -184,7 +184,7 @@ class _RoleSelectorState extends State<RoleSelector> {
   String? _error;
 
   /// Per-role `TextEditingController`s for the name + description
-  /// fields.  We own them in state so they survive rebuilds —
+  /// fields.  We own them in state so they survive rebuilds  - 
   /// `TextField` would otherwise reset to the widget's initial
   /// `text:` on every rebuild, wiping any user edits the moment
   /// the parent calls `setState`.  Indexes match `_roles`.
@@ -332,7 +332,7 @@ class _RoleSelectorState extends State<RoleSelector> {
     // 400 at install time).
     for (final g in _roles) {
       if (g.includes.remove(removed.name)) {
-        // No-op — just keep the list in sync.
+        // No-op - just keep the list in sync.
       }
     }
     setState(() => _error = null);
@@ -341,7 +341,7 @@ class _RoleSelectorState extends State<RoleSelector> {
 
   /// Validate-and-commit the role name on focus loss / submit.
   /// Strips a trailing `*` (default-signup marker) and updates
-  /// [_defaultSignup] accordingly — but only when the widget is in
+  /// [_defaultSignup] accordingly - but only when the widget is in
   /// a mode that supports the marker (app-listing use case).  In
   /// auth use, the marker is meaningless, so we treat the typed
   /// value as a plain DNS-label name.
@@ -352,7 +352,7 @@ class _RoleSelectorState extends State<RoleSelector> {
         name = name.substring(0, name.length - 1);
         _defaultSignup = name;
       } else if (_defaultSignup == name) {
-        // User edited away the marker — clear it.
+        // User edited away the marker - clear it.
         _defaultSignup = null;
       }
     }
@@ -544,7 +544,7 @@ class _RoleSelectorState extends State<RoleSelector> {
           ),
           if (widget.showIncludes) ...[
             const SizedBox(height: Sentin8Spacing.sm),
-            // Includes — names of OTHER roles in this listing whose
+            // Includes - names of OTHER roles in this listing whose
             // scopes should be merged into this role's permissions at
             // install time.  The picker only offers roles defined
             // above this one in the list (excluding the current row)
@@ -664,7 +664,7 @@ class _RoleSelectorState extends State<RoleSelector> {
 
   Widget _buildNameField(int idx, _RoleDraft g) {
     // The displayed text shows the trailing `*` for the default-signup
-    // role so the marker is visible in the UI — but only when the
+    // role so the marker is visible in the UI - but only when the
     // widget is in a mode that supports default-signup (app listing
     // use case).  Auth roles don't have a default-signup concept,
     // so we hide the marker there.
@@ -679,7 +679,7 @@ class _RoleSelectorState extends State<RoleSelector> {
     final ctrl = _nameCtrls[idx];
     if (ctrl.text != displayName) {
       // Don't disturb the cursor if the user is actively editing
-      // — only overwrite when we know the displayed value would
+      // - only overwrite when we know the displayed value would
       // actually be different (e.g. marker flip).
       final sel = ctrl.selection;
       ctrl.value = TextEditingValue(
@@ -828,7 +828,7 @@ class _IncludesAutocomplete extends StatelessWidget {
     // Filter the candidate list to:
     //   - exclude already-selected names
     //   - exclude the current role's own name (defense in
-    //     depth — the parent also excludes this)
+    //     depth - the parent also excludes this)
     //   - exclude empty strings
     final available = candidates
         .where((n) =>

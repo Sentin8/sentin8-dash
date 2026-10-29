@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Organization settings — `/org/{orgId}/settings` (Story 13.1.9).
+// Organization settings - `/org/{orgId}/settings` (Story 13.1.9).
 
 import 'package:flutter/material.dart';
 

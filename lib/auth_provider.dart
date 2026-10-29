@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8 Auth provider — manages BFF session state for Dash.
+// Sentin8 Auth provider - manages BFF session state for Dash.
 //
 // Dash uses the standard BFF (Backend for Frontend) OAuth flow:
 //   1. User clicks "Sign in" → Dash redirects to BFF GET /auth/login
@@ -26,7 +26,7 @@ import 'services.dart';
 
 /// AuthProvider manages the current BFF session state.
 class AuthProvider extends ChangeNotifier {
-  /// Singleton instance — shared across the app so all pages use the
+  /// Singleton instance - shared across the app so all pages use the
   /// same initialized provider with its services and session state.
   static final AuthProvider instance = AuthProvider._();
 
@@ -37,7 +37,7 @@ class AuthProvider extends ChangeNotifier {
   // _sentin8Domain (for the orgDomain/envDomain UI helpers) and _bffBaseUrl
   // are both derived from the hostname dash is served from (see
   // _currentHost / _inferSentin8Domain / _inferBffBaseUrl). dash constructs
-  // exactly ONE external URL — `bff.{current host}` — and routes every
+  // exactly ONE external URL - `bff.{current host}` - and routes every
   // other service (auth sign-up/sign-out, …) THROUGH BFF, so there are no
   // hardcoded `local.sentin8.dev` / `bff.dash.ops.sys` / `auth.*` literals.
   String _sentin8Domain = _inferSentin8Domain();
@@ -78,7 +78,7 @@ class AuthProvider extends ChangeNotifier {
   /// `sentin8-dash.ops.sys.local.sentin8.dev`, `dash.ops.ibank.local.sentin8.dev`). All
   /// scope-dependent URLs are derived from this so one build runs on
   /// platform / org / env dash instances. Empty outside a browser (unit
-  /// tests) — inject via `init(sentin8Domain: ...)` then.
+  /// tests) - inject via `init(sentin8Domain: ...)` then.
   static String _currentHost() {
     try {
       return web.window.location.hostname;
@@ -97,7 +97,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   /// BFF base URL for the current dash instance. Apps (dash included)
-  /// talk ONLY to BFF — `bff.{current host}` — and route every other
+  /// talk ONLY to BFF - `bff.{current host}` - and route every other
   /// service (auth sign-up/sign-out, …) THROUGH BFF. So this is the
   /// single external URL dash constructs; no hostname parsing or hardcoded
   /// auth/platform hosts anywhere.
@@ -137,7 +137,7 @@ class AuthProvider extends ChangeNotifier {
         web.RequestInit(method: 'POST', credentials: 'include'),
       ).toDart;
     } catch (_) {
-      // Best-effort — if refresh fails, init() will use the old session.
+      // Best-effort - if refresh fails, init() will use the old session.
     }
     await init();
   }
@@ -157,7 +157,7 @@ class AuthProvider extends ChangeNotifier {
     }
     final completer = _initCompleter!;
 
-    // Check BFF session metadata — the session cookie is HttpOnly so we can't
+    // Check BFF session metadata - the session cookie is HttpOnly so we can't
     // read it directly; instead we call GET /auth/session.
     await _fetchSession();
     notifyListeners();
@@ -201,7 +201,7 @@ class AuthProvider extends ChangeNotifier {
             <String>[];
         _state = AuthState(
           isAuthenticated: true,
-          token: 'bff-session', // Opaque marker — real token is in HttpOnly cookie
+          token: 'bff-session', // Opaque marker  -  real token is in HttpOnly cookie
           userId: user['id'] as String?,
           organizationId: user['org_id'] as String? ??
               res['org_id'] as String?,
@@ -237,7 +237,7 @@ class AuthProvider extends ChangeNotifier {
       }
     } catch (e, st) {
       DashLogger.warn('session fetch failed: $e', error: e, stackTrace: st);
-      // No active session — user is unauthenticated
+      // No active session - user is unauthenticated
       _state = AuthState.unauthenticated;
     }
   }
@@ -245,7 +245,7 @@ class AuthProvider extends ChangeNotifier {
   /// Redirect to BFF to initiate the OAuth flow.
   /// BFF generates PKCE server-side, stores it in Redis, and redirects
   /// to Auth /oauth/authorize. The authorization code never reaches
-  /// the frontend — Auth redirects back to BFF /auth/callback.
+  /// the frontend - Auth redirects back to BFF /auth/callback.
   void signInWithAuth() {
     DashMetrics().recordSignInAttempt();
     DashLogger.info('sign-in initiated via BFF OAuth redirect');
@@ -260,12 +260,12 @@ class AuthProvider extends ChangeNotifier {
   void signUpWithAuth() {
     DashLogger.info('sign-up initiated via BFF (Auth hosted sign-up)');
     resetSessionCorrelationId();
-    // Route through BFF — it redirects to the Auth hosted sign-up page
+    // Route through BFF - it redirects to the Auth hosted sign-up page
     // with the OAuth params for this scope. dash never calls Auth directly.
     web.window.location.href = '$_bffBaseUrl/auth/sign-up';
   }
 
-  /// Sign out — call BFF sign-out (server-side token revocation) and
+  /// Sign out - call BFF sign-out (server-side token revocation) and
   /// Auth sign-out (clears __session cookie), then redirect to sign-in.
   void signOut() async {
     DashMetrics().recordSignOutAttempt();
@@ -299,7 +299,7 @@ class AuthProvider extends ChangeNotifier {
     // Rotate correlation ID so the new anonymous session has a fresh ID.
     resetSessionCorrelationId();
     // Return to the sign-in page of the SAME dash instance the user is on
-    // (platform / org / env scoped) — never assume a fixed platform host.
+    // (platform / org / env scoped) - never assume a fixed platform host.
     web.window.location.href = '${web.window.location.origin}/#/sign-in';
   }
 }

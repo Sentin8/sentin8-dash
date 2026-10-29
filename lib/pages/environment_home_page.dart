@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Environment home page — the main dashboard with left rail navigation.
+// Environment home page - the main dashboard with left rail navigation.
 //
 // Shows dynamic service cards discovered at runtime from the module registry
 // (sentin8_vertical_services.admin_ui, populated by `sentin8-cli vertical enroll`).

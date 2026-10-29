@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Organization home — `/org/{orgId}` (Story 13.1.8).
+// Organization home - `/org/{orgId}` (Story 13.1.8).
 //
 // Lists the environments belonging to the active organization and routes to
 // environment creation or environment home.

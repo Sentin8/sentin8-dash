@@ -3,8 +3,8 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Environment home — `?env={envId}`.
-// env_id is globally unique — org_id is resolved server-side.
+// Environment home - `?env={envId}`.
+// env_id is globally unique - org_id is resolved server-side.
 //
 // Shows dynamic service cards discovered at runtime from the module registry
 // (sentin8_vertical_services.admin_ui, populated by `sentin8-cli vertical enroll`).

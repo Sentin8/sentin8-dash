@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Organization settings page — profile, members, branding, custom domain.
+// Organization settings page - profile, members, branding, custom domain.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../auth_provider.dart';
@@ -90,7 +90,7 @@ class _OrganizationSettingsPageState extends State<OrganizationSettingsPage> {
       await auth.services!.sys.put('/v1/org/${widget.orgId}', body: {
         'custom_domain': _domainCtrl.text.trim(),
       });
-      if (mounted) setState(() => _domainMessage = 'Domain updated — subdomains re-provisioned');
+      if (mounted) setState(() => _domainMessage = 'Domain updated - subdomains re-provisioned');
     } catch (e) {
       if (mounted) setState(() => _domainMessage = 'Error: $e');
     } finally {

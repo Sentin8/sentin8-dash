@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Setup wizard page — install an App listing into an environment.
+// Setup wizard page - install an App listing into an environment.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../auth_provider.dart';

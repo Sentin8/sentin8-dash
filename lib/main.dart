@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8 Dash — Operator Dashboard (Flutter Web)
+// Sentin8 Dash - Operator Dashboard (Flutter Web)
 // Dash is the primary web application for Sentin8 operators and organization staff.
 //
 // The dash owns only the shell routes (signin, bootstrap, org/env management).
@@ -68,12 +68,12 @@ class _DashAppState extends State<DashApp> {
   }
 
   /// Wraps a page widget in an RlsGuard for org-scoped shell routes.
-  /// org-scoped routes have envId='' — the guard checks org membership only.
+  /// org-scoped routes have envId='' - the guard checks org membership only.
   Widget _guardOrg(String orgId, Widget child) =>
       RlsGuard(envId: '', orgId: orgId, child: child);
 
   /// Wraps a page widget in an RlsGuard for env-scoped routes.
-  /// env_id is globally unique — org_id is NOT required (resolved server-side).
+  /// env_id is globally unique - org_id is NOT required (resolved server-side).
   Widget _guardEnv(String envId, {String? feature, required Widget child}) =>
       RlsGuard(envId: envId, feature: feature, child: child);
 
@@ -92,7 +92,7 @@ class _DashAppState extends State<DashApp> {
 
     // Debug: log the route
     DashLogger.info('route: name=$name segments=$segments query=$query');
-    // Expose the app's actual navigation state to e2e automation — the
+    // Expose the app's actual navigation state to e2e automation - the
     // browser URL can lag the Navigator on programmatic pushes.
     setLastRouteBridge(name);
 
@@ -111,7 +111,7 @@ class _DashAppState extends State<DashApp> {
     }
 
     // Shell routes with ?org= (org-scoped) or ?env= (env-scoped).
-    // env_id is globally unique — org_id is NOT required in the URL for
+    // env_id is globally unique - org_id is NOT required in the URL for
     // env-scoped routes. The backend resolves org_id from env_id via
     // sentin8_sys_environments (see architecture-principles.md §3.1, §4.3e).
     final orgId = query['org'] ?? '';
@@ -172,7 +172,7 @@ class _DashAppState extends State<DashApp> {
 
       // Determine scope from query params:
       //   no org/env  → platform-scoped
-      //   env only    → env-scoped (org_id not in URL — resolved server-side)
+      //   env only    → env-scoped (org_id not in URL - resolved server-side)
       if (orgId.isEmpty && envId.isEmpty) {
         // Platform-scoped
         return _page(
@@ -194,7 +194,7 @@ class _DashAppState extends State<DashApp> {
             ),
             settings);
       } else {
-        // Env-scoped (env_id only — org_id resolved server-side from env_id)
+        // Env-scoped (env_id only - org_id resolved server-side from env_id)
         return _page(
             _guardEnv(
               envId,

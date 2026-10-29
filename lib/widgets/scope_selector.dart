@@ -3,12 +3,12 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// ScopeSelector — autocomplete + add-or-create selector for OAuth scopes.
+// ScopeSelector - autocomplete + add-or-create selector for OAuth scopes.
 //
 // Renders a text input with autocomplete suggestions. Typing filters
 // the suggestions; pressing Enter / Tab / clicking an option adds it
 // as a chip. The user can also type a brand-new scope (one not in the
-// suggestion list) and add it — the widget accepts any DNS-label style
+// suggestion list) and add it - the widget accepts any DNS-label style
 // string (`service:resource:action`).
 //
 // Selected scopes are shown as removable chips below the input, in
@@ -16,7 +16,7 @@
 //
 // Used in:
 //   - app registration (oauth_defaults.scopes)
-//   - role editor (auth_roles.permissions) — see [RoleSelector].
+//   - role editor (auth_roles.permissions) - see [RoleSelector].
 //
 // The widget is intentionally presentational: it owns a local
 // `List<String>` of selected scopes and exposes a `ValueChanged<List<String>>`
@@ -29,7 +29,7 @@ import '../theme.dart';
 /// from this list via the autocomplete, or type their own
 /// (e.g. `myapp:read`, `myapp:write`).
 ///
-/// The list is intentionally non-exhaustive — it covers the most
+/// The list is intentionally non-exhaustive - it covers the most
 /// common platform resources so the user has somewhere to start,
 /// but the widget never restricts the user to this list. New scopes
 /// entered manually are added as-is.
@@ -67,12 +67,12 @@ bool _isValidScope(String s) {
   return _scopePattern.hasMatch(s);
 }
 
-/// ScopeSelector — autocomplete + add-or-create selector for OAuth scopes.
+/// ScopeSelector - autocomplete + add-or-create selector for OAuth scopes.
 ///
 /// Owns its own `List<String>` of selected scopes (initialized from
 /// [initialScopes]) and reports changes via [onChanged]. The parent
 /// can also pass an explicit [suggestions] list (e.g. loaded from the
-/// server) — otherwise the built-in [_kDefaultScopeSuggestions] is used.
+/// server) - otherwise the built-in [_kDefaultScopeSuggestions] is used.
 ///
 /// Visual model:
 ///   ┌────────────────────────────────────┐
@@ -135,7 +135,7 @@ class _ScopeSelectorState extends State<ScopeSelector> {
   final FocusNode _focus = FocusNode();
   late List<String> _scopes;
   String? _error;
-  // Resolved suggestion list — starts as null, populated by the
+  // Resolved suggestion list - starts as null, populated by the
   // async fetcher (if provided) in [initState]. When null, the
   // build falls back to [widget.suggestions] or the built-in
   // [_kDefaultScopeSuggestions].
@@ -145,7 +145,7 @@ class _ScopeSelectorState extends State<ScopeSelector> {
   void initState() {
     super.initState();
     _scopes = List<String>.from(widget.initialScopes);
-    // Kick off the async fetch (if any).  We don't await it here —
+    // Kick off the async fetch (if any).  We don't await it here  - 
     // [build] shows the built-in defaults until the fetch resolves
     // and calls [setState].
     final fetcher = widget.fetchSuggestions;
@@ -154,7 +154,7 @@ class _ScopeSelectorState extends State<ScopeSelector> {
         if (!mounted) return;
         setState(() => _fetchedSuggestions = scopes);
       }).catchError((Object e, StackTrace st) {
-        // Log and stay on the fallback list — the widget is fully
+        // Log and stay on the fallback list - the widget is fully
         // usable with the built-in suggestions.
         // ignore: avoid_print
         print('ScopeSelector: fetchSuggestions failed: $e');
@@ -185,7 +185,7 @@ class _ScopeSelectorState extends State<ScopeSelector> {
   List<String> get _allSuggestions {
     // Resolution order:
     //   1. async-fetched list from [widget.fetchSuggestions] (the
-    //      platform catalog served by sys) — only set once the
+    //      platform catalog served by sys) - only set once the
     //      future resolves in [initState];
     //   2. static [widget.suggestions] passed in by the parent;
     //   3. built-in [_kDefaultScopeSuggestions] fallback.
@@ -387,7 +387,7 @@ class _ScopeSelectorState extends State<ScopeSelector> {
               ),
             ),
             const SizedBox(width: Sentin8Spacing.sm),
-            // "Add" button — explicit affordance for adding a typed
+            // "Add" button - explicit affordance for adding a typed
             // (possibly brand-new) scope. The autocomplete covers
             // the common case, but this is the escape hatch.
             Padding(

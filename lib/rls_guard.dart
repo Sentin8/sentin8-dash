@@ -3,19 +3,19 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8 Dash RLS Guard — enforces Row-Level Security on every route.
+// Sentin8 Dash RLS Guard - enforces Row-Level Security on every route.
 //
 // Per design/sentin8-dash-technical-design.md §7:
-//   1. Organization membership gate — user must be a member of {orgId}
+//   1. Organization membership gate - user must be a member of {orgId}
 //      (org-scoped routes only)
-//   2. Environment RBAC gate — user must have a role/group in {envId}
+//   2. Environment RBAC gate - user must have a role/group in {envId}
 //      (env-scoped routes; env_id is globally unique, org_id is resolved
-//      server-side — see architecture-principles.md §4.3d)
-//   3. Feature enablement gate — feature must be enabled for the env
-//   4. Backend RLS passthrough — envId attached to proxy headers
-//   5. No client-side data filtering — server returns only authorized rows
+//      server-side - see architecture-principles.md §4.3d)
+//   3. Feature enablement gate - feature must be enabled for the env
+//   4. Backend RLS passthrough - envId attached to proxy headers
+//   5. No client-side data filtering - server returns only authorized rows
 //
-// For env-scoped routes, only envId is required — orgId is not needed
+// For env-scoped routes, only envId is required - orgId is not needed
 // because env_id is globally unique and the backend resolves org_id
 // from env_id via sentin8_sys_environments.
 import 'package:flutter/material.dart';
@@ -27,10 +27,10 @@ enum RlsResult { allowed, notMember, envNotFound, notAuthenticated, featureDisab
 
 /// Verifies RLS for a given org/env scope before rendering a page.
 ///
-/// [orgId] — the organization from the URL (org-scoped routes only).
-/// [envId] — the environment from the URL (env-scoped routes).
-/// For env-scoped routes, orgId may be empty — it is resolved server-side.
-/// [feature] — optional feature area name for feature-enablement gate.
+/// [orgId] - the organization from the URL (org-scoped routes only).
+/// [envId] - the environment from the URL (env-scoped routes).
+/// For env-scoped routes, orgId may be empty - it is resolved server-side.
+/// [feature] - optional feature area name for feature-enablement gate.
 class RlsGuard extends StatefulWidget {
   final String orgId;
   final String envId;
@@ -94,13 +94,13 @@ class _RlsGuardState extends State<RlsGuard> {
 
     // Gate 1: Organization membership (org-scoped routes only).
     // For env-scoped routes (envId is set), org_id is resolved server-side
-    // from env_id — no client-side org membership check needed.
+    // from env_id - no client-side org membership check needed.
     if (widget.envId.isEmpty && widget.orgId.isNotEmpty) {
       if (!isPlatformAdmin) {
         // Verify the user is a member of this org via Sys.
         //
         // Settle-window retry (design §7.1-1): immediately after org creation
-        // the services may still hold the caller's cached pre-grant identity —
+        // the services may still hold the caller's cached pre-grant identity  - 
         // the bootstrap probe answers 403 (or 200 with memberships not yet
         // containing the new org) until the `sentin8:sys:identity:updated`
         // invalidation event propagates (policy design §3.1d-1; observed up to
@@ -109,7 +109,7 @@ class _RlsGuardState extends State<RlsGuard> {
         Map<String, dynamic>? lastBootstrap;
         for (var attempt = 0; attempt < 5; attempt++) {
           if (attempt > 0) {
-            // 1s / 2s / 4s backoff — bounded above the invalidation window.
+            // 1s / 2s / 4s backoff - bounded above the invalidation window.
             await Future<void>.delayed(Duration(seconds: 1 << (attempt - 1)));
           }
           if (!mounted) return;
@@ -122,17 +122,17 @@ class _RlsGuardState extends State<RlsGuard> {
               return orgId == widget.orgId;
             });
             if (isMember) break;
-            // 200 with memberships that do not (yet) include this org —
+            // 200 with memberships that do not (yet) include this org  - 
             // likely a stale cached identity. Keep retrying.
           } catch (_) {
-            // Bootstrap failed (e.g. 403 — the services still hold the
+            // Bootstrap failed (e.g. 403 - the services still hold the
             // caller's cached pre-grant identity, policy design §3.1d-1).
             //
             // The session orgId is a sign-in-time snapshot and is STALE right
             // after org creation (the user's session org does not yet list
             // the new org), so it must never produce an instant notMember
             // denial while settle-window retries remain. Keep retrying; if
-            // bootstrap never succeeds, allow but log — the backend RLS
+            // bootstrap never succeeds, allow but log - the backend RLS
             // enforces the final decision.
           }
         }
@@ -154,17 +154,17 @@ class _RlsGuardState extends State<RlsGuard> {
           }
         }
         // lastBootstrap == null: bootstrap failed on every attempt with no
-        // session-org mismatch — allow but log; backend RLS enforces.
+        // session-org mismatch - allow but log; backend RLS enforces.
       }
     }
 
     // Gate 2: Environment RBAC + feature enablement (env-scoped routes only).
-    // env_id is globally unique — the backend resolves org_id from env_id
+    // env_id is globally unique - the backend resolves org_id from env_id
     // and validates RBAC. We fetch the env to check feature enablement.
     if (widget.envId.isNotEmpty) {
       Map<String, dynamic>? envRes;
       String? gate2Error;
-      // Retry up to 3 times — the first request after page load can fail
+      // Retry up to 3 times - the first request after page load can fail
       // transiently (BFF token refresh, network race, etc).
       for (var attempt = 0; attempt < 3; attempt++) {
         try {
@@ -179,7 +179,7 @@ class _RlsGuardState extends State<RlsGuard> {
         }
       }
       if (envRes == null) {
-        // All retries failed — only treat as envNotFound if the error
+        // All retries failed - only treat as envNotFound if the error
         // is a 404. Other errors (502, network, etc) are transient and
         // should not permanently block the page.
         final is404 = gate2Error != null && gate2Error.contains('404');
@@ -191,7 +191,7 @@ class _RlsGuardState extends State<RlsGuard> {
                 : null;
           });
         }
-        // If non-404, allow through — backend RLS will enforce the final decision.
+        // If non-404, allow through - backend RLS will enforce the final decision.
         return;
       }
       try {
@@ -215,7 +215,7 @@ class _RlsGuardState extends State<RlsGuard> {
           }
         }
       } catch (e) {
-        // Unexpected error parsing the env response — allow through.
+        // Unexpected error parsing the env response - allow through.
         // The backend RLS will enforce the final decision.
       }
     }
@@ -239,13 +239,13 @@ class _RlsGuardState extends State<RlsGuard> {
         );
       case RlsResult.notMember:
         return _Forbidden(
-          title: 'Access Denied — Organization Membership',
+          title: 'Access Denied - Organization Membership',
           message: _detail ?? 'You are not a member of this organization.',
           onRetry: _check,
         );
       case RlsResult.envNotFound:
         return _Forbidden(
-          title: 'Access Denied — Environment Not Found',
+          title: 'Access Denied - Environment Not Found',
           message: _detail ?? 'This environment does not exist or you do not have access to it.',
         );
       case RlsResult.featureDisabled:

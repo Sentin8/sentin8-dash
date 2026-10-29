@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// App Store page — browse and install App store listings.
+// App Store page - browse and install App store listings.
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 import '../theme.dart';
@@ -54,15 +54,15 @@ class _AppStorePageState extends State<AppStorePage> {
     // Register test bridge handler so e2e tests can create listings
     // by calling window.sentin8TestCreateListing(appName, appSlug, description).
     // This triggers the same _createListing() method as clicking the
-    // "Create & Publish" button — not a direct API call.
+    // "Create & Publish" button - not a direct API call.
     setCreateListingHandler(
         (appName, appSlug, description, backendUrl,
             [scopes, roles, defaultSignupRole]) {
       _appNameCtrl.text = appName;
-      // Slug is auto-generated from the app name — ignore the passed slug.
+      // Slug is auto-generated from the app name - ignore the passed slug.
       _descriptionCtrl.text = description;
       _backendUrlCtrl.text = backendUrl;
-      // scopes are optional — e2e tests can pass them via the 5th
+      // scopes are optional - e2e tests can pass them via the 5th
       // arg as a comma- or space-separated list. The shared
       // [ScopeSelector] widget takes a `List<String>`, so we parse
       // the text the same way the legacy TextField used to.
@@ -72,7 +72,7 @@ class _AppStorePageState extends State<AppStorePage> {
             .where((s) => s.isNotEmpty)
             .toList();
       }
-      // roles are optional — e2e tests pass newline-separated role
+      // roles are optional - e2e tests pass newline-separated role
       // defs via the 6th arg. Each non-blank, non-`#` line is
       // `name:scope1,scope2`. The `default_signup_role` is passed
       // via the 7th arg (a single name). We parse into the
@@ -227,7 +227,7 @@ class _AppStorePageState extends State<AppStorePage> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Sentin8Colors.carbonBlack,
-        title: Text('Instance Details — ${inst['app_name'] ?? inst['app_slug'] ?? 'App'}', style: Sentin8Text.h3),
+        title: Text('Instance Details - ${inst['app_name'] ?? inst['app_slug'] ?? 'App'}', style: Sentin8Text.h3),
         content: SizedBox(
           width: 500,
           child: Column(
@@ -236,12 +236,12 @@ class _AppStorePageState extends State<AppStorePage> {
             children: [
               _DetailRow(label: 'Instance ID', value: inst['id'] as String? ?? ''),
               _DetailRow(label: 'App Slug', value: inst['app_slug'] as String? ?? ''),
-              _DetailRow(label: 'Instance Name', value: inst['instance_name'] as String? ?? '—'),
-              _DetailRow(label: 'Instance Description', value: inst['instance_description'] as String? ?? '—'),
+              _DetailRow(label: 'Instance Name', value: inst['instance_name'] as String? ?? ' - '),
+              _DetailRow(label: 'Instance Description', value: inst['instance_description'] as String? ?? ' - '),
               _DetailRow(label: 'Hostname', value: inst['hostname'] as String? ?? ''),
               _DetailRow(label: 'Status', value: inst['status'] as String? ?? ''),
-              _DetailRow(label: 'OAuth Client ID', value: inst['oauth_client_id'] as String? ?? '—'),
-              _DetailRow(label: 'Listing ID', value: inst['listing_id'] as String? ?? '—'),
+              _DetailRow(label: 'OAuth Client ID', value: inst['oauth_client_id'] as String? ?? ' - '),
+              _DetailRow(label: 'Listing ID', value: inst['listing_id'] as String? ?? ' - '),
             ],
           ),
         ),
@@ -328,7 +328,7 @@ class _AppStorePageState extends State<AppStorePage> {
   /// (defaulted to [appSlug]) and optional instance name + description.
   /// Returns null if cancelled, otherwise an [_InstallOptions] object.
   Future<_InstallOptions?> _showInstallDialog(String appSlug) async {
-    // The subdomain is required and defaults to the app slug — the
+    // The subdomain is required and defaults to the app slug - the
     // user can keep it (e.g. `ebank`) or type a different prefix (e.g. `www`).
     // The full hostname is built from {subdomain}.{envSlug}.{orgDomain}
     // (e.g. www.prod.ibank.local), env-scoped like the default app hostname.
@@ -352,7 +352,7 @@ class _AppStorePageState extends State<AppStorePage> {
       envSlug = envRes['slug'] as String? ?? '';
     } catch (_) {}
     String authMode = 'customer';
-    // Story 12.4.13 — staff auth domain default value (shown when authMode=staff).
+    // Story 12.4.13 - staff auth domain default value (shown when authMode=staff).
     // Pre-fill the default staff Auth domain: auth.ops.{orgDomain}
     final staffAuthDomainDefault = orgDomain.isNotEmpty
         ? 'auth.ops.$orgDomain'
@@ -371,7 +371,7 @@ class _AppStorePageState extends State<AppStorePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Choose a subdomain for this app instance. The app slug is used as the default — change it if you want a custom prefix.',
+                'Choose a subdomain for this app instance. The app slug is used as the default - change it if you want a custom prefix.',
                 style: Sentin8Text.bodySecondary,
               ),
               const SizedBox(height: Sentin8Spacing.md),
@@ -408,7 +408,7 @@ class _AppStorePageState extends State<AppStorePage> {
                 ),
               ),
               const SizedBox(height: Sentin8Spacing.md),
-              // Story 12.4.8 — auth mode selector.
+              // Story 12.4.8 - auth mode selector.
               Text('Auth Mode', style: Sentin8Text.bodySecondary),
               const SizedBox(height: Sentin8Spacing.sm),
               SegmentedButton<String>(
@@ -436,7 +436,7 @@ class _AppStorePageState extends State<AppStorePage> {
                     : 'Customer mode: public sign-up, env-scoped Auth.',
                 style: TextStyle(fontSize: 12, color: Colors.grey[600]),
               ),
-              // Story 12.4.13 — Staff Auth Domain field (only when authMode=staff).
+              // Story 12.4.13 - Staff Auth Domain field (only when authMode=staff).
               if (authMode == 'staff') ...[
                 const SizedBox(height: Sentin8Spacing.md),
                 // Use a fresh controller with the default text so the DOM
@@ -467,7 +467,7 @@ class _AppStorePageState extends State<AppStorePage> {
             onPressed: () {
               // Validate: subdomain is required and must be a non-empty
               // DNS label. We trim and reject empty/whitespace-only
-              // values — Flutter TextField doesn't enforce this for us
+              // values - Flutter TextField doesn't enforce this for us
               // when there's a default value (the user could clear it).
               final subdomain = domainCtrl.text.trim();
               if (subdomain.isEmpty) {
@@ -589,7 +589,7 @@ class _AppStorePageState extends State<AppStorePage> {
       }
     }
     final existingDefaultSignup = listing['default_signup_role'] as String?;
-    // Latest values from the nested widgets — captured on Save.
+    // Latest values from the nested widgets - captured on Save.
     List<String> selectedScopes = List<String>.from(scopesList);
     List<RoleDraft> selectedRoles = List<RoleDraft>.from(existingRoles);
     String? selectedDefaultSignup = existingDefaultSignup;
@@ -598,7 +598,7 @@ class _AppStorePageState extends State<AppStorePage> {
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setSt) => AlertDialog(
           backgroundColor: Sentin8Colors.carbonBlack,
-          title: Text('App Settings — ${listing['app_name'] ?? 'App'}', style: Sentin8Text.h3),
+          title: Text('App Settings - ${listing['app_name'] ?? 'App'}', style: Sentin8Text.h3),
           content: SizedBox(
             width: 560,
             child: SingleChildScrollView(
@@ -612,7 +612,7 @@ class _AppStorePageState extends State<AppStorePage> {
                   const SizedBox(height: Sentin8Spacing.md),
                   TextField(controller: backendCtrl, decoration: const InputDecoration(labelText: 'Backend URL', hintText: 'http://localhost:3200', border: OutlineInputBorder())),
                   const SizedBox(height: Sentin8Spacing.md),
-                  // OAuth scopes — autocomplete + chip UI.
+                  // OAuth scopes - autocomplete + chip UI.
                   ScopeSelector(
                     initialScopes: scopesList,
                     fetchSuggestions: _fetchScopeCatalog,
@@ -625,7 +625,7 @@ class _AppStorePageState extends State<AppStorePage> {
                   // App-declared security roles + their scopes.
                   // Note: in app-store listings each role is a row
                   // with name + scopes. "Includes" are NOT exposed
-                  // here — app listings don't compose auth roles
+                  // here - app listings don't compose auth roles
                   // (those are platform-managed).  The user can
                   // still leave both scopes and roles empty and
                   // just rely on the listing's OAuth scopes.
@@ -682,7 +682,7 @@ class _AppStorePageState extends State<AppStorePage> {
     descCtrl.dispose();
     backendCtrl.dispose();
     if (saved != true) return;
-    // Build the wire-format roles list — drop any rows that don't
+    // Build the wire-format roles list - drop any rows that don't
     // have a name set (the user clicked away without finishing).
     final rolesPayload = <Map<String, dynamic>>[];
     for (final g in selectedRoles) {
@@ -820,7 +820,7 @@ class _AppStorePageState extends State<AppStorePage> {
                     const SizedBox(height: Sentin8Spacing.sm),
                     TextField(controller: _backendUrlCtrl, decoration: const InputDecoration(labelText: 'Backend URL', hintText: 'http://localhost:3200')),
                     const SizedBox(height: Sentin8Spacing.sm),
-                    // OAuth scopes — autocomplete + chip UI. The new
+                    // OAuth scopes - autocomplete + chip UI. The new
                     // selector replaces the old comma-separated
                     // textbox. OIDC scopes (openid, profile, email)
                     // are still added automatically by the server.
@@ -833,7 +833,7 @@ class _AppStorePageState extends State<AppStorePage> {
                       onChanged: (v) => setState(() => _selectedScopes = v),
                     ),
                     const SizedBox(height: Sentin8Spacing.md),
-                    // Security roles — each row is one role with its
+                    // Security roles - each row is one role with its
                     // own name + scopes. Append * to a name to mark
                     // the default signup role. "Includes" are not
                     // exposed for app listings (auth roles are
@@ -853,7 +853,7 @@ class _AppStorePageState extends State<AppStorePage> {
                       },
                     ),
                     const SizedBox(height: Sentin8Spacing.sm),
-                    // Visibility selector — controls which orgs/envs can see
+                    // Visibility selector - controls which orgs/envs can see
                     // this listing in their App Store.
                     Align(
                       alignment: Alignment.centerLeft,
@@ -920,7 +920,7 @@ class _AppStorePageState extends State<AppStorePage> {
                           const SizedBox(height: Sentin8Spacing.sm),
                           Text(listing['app_name'] as String? ?? 'Unknown', style: Sentin8Text.h3),
                           const SizedBox(height: Sentin8Spacing.xs),
-                          // Visibility badge — shows the listing's scope.
+                          // Visibility badge - shows the listing's scope.
                           _VisibilityBadge(visibility: visibility),
                           const SizedBox(height: Sentin8Spacing.xs),
                           Text(listing['description'] as String? ?? '', style: Sentin8Text.caption, maxLines: 3, overflow: TextOverflow.ellipsis),
@@ -1051,7 +1051,7 @@ class _InstallOptions {
   final String instanceName;
   final String instanceDescription;
   final String authMode; // 'customer' or 'staff'
-  final String? staffAuthDomain; // Story 12.4.13 — only when authMode=staff
+  final String? staffAuthDomain; // Story 12.4.13  -  only when authMode=staff
   const _InstallOptions({
     required this.customDomain,
     required this.instanceName,

@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// RFW Page — stateful page widget that fetches an RFW definition from a vertical
+// RFW Page - stateful page widget that fetches an RFW definition from a vertical
 // service, renders it, and handles form submissions.
 //
 // This is the main entry point for vertical admin pages in Sentin8:Dash.
@@ -17,7 +17,7 @@ import '../auth_provider.dart';
 import '../theme.dart';
 import '../widgets/icon_lookup.dart';
 
-/// The RFW page widget — fetches and renders a remote admin UI page.
+/// The RFW page widget - fetches and renders a remote admin UI page.
 class RfwPage extends StatefulWidget {
   final String orgId;
   final String envId;
@@ -119,7 +119,7 @@ class _RfwPageState extends State<RfwPage> {
     for (var attempt = 0; attempt < 6; attempt++) {
       try {
         await _fetchPageOnce(cacheKey);
-        return; // loaded or handled — no retry needed
+        return; // loaded or handled  -  no retry needed
       } catch (e) {
         // ignore: avoid_print
         print('rfw_retry: attempt=$attempt error=$e');
@@ -238,7 +238,7 @@ class _RfwPageState extends State<RfwPage> {
 
     // Native-widget host registry closure needs the very RfwActions being
     // constructed (the policy simulator's run/save buttons call back through
-    // it) — hold it in a single-element container assigned right after
+    // it) - hold it in a single-element container assigned right after
     // construction; the callbacks only run at render time, long after.
     RfwActions? actionsRef;
     final actions = RfwActions(
@@ -263,9 +263,9 @@ class _RfwPageState extends State<RfwPage> {
             : '/v1/admin/$clean';
         final response = await client.get(path);
         // Handle multiple response formats:
-        // 1. { "data": [...] } — standard envelope
-        // 2. { "users": [...] } — resource-keyed (auth, stat, etc.)
-        // 3. [...] — bare array
+        // 1. { "data": [...] } - standard envelope
+        // 2. { "users": [...] } - resource-keyed (auth, stat, etc.)
+        // 3. [...] - bare array
         if (response['data'] is List) {
           return (response['data'] as List)
               .cast<Map<String, dynamic>>()
@@ -313,12 +313,12 @@ class _RfwPageState extends State<RfwPage> {
                 .toList();
           }
         }
-        // Response is always a Map from ApiClient.get — no bare array case.
+        // Response is always a Map from ApiClient.get - no bare array case.
         return [];
       },
       onNavigate: (route) {
         // Navigate to a route relative to the current service.
-        // Route is like "users/new" or "install?listing_id={id}" — prepend
+        // Route is like "users/new" or "install?listing_id={id}" - prepend
         // service and scope params. If the route already has a query string,
         // append scope params with '&' instead of '?'.
         // For env-scoped routes, only ?env= is used (org_id resolved server-side).
@@ -332,7 +332,7 @@ class _RfwPageState extends State<RfwPage> {
             .pushNamed('/${widget.service}/$route$scopeParams');
       },
       onRowClick: (rowId) {
-        // Row click — navigate to the row's detail page.
+        // Row click - navigate to the row's detail page.
       },
       submitForm: (endpoint, body) async {
         final auth = AuthProvider.instance;
@@ -426,7 +426,7 @@ class _RfwPageState extends State<RfwPage> {
           : p.icon;
       return TabEntry(label: label, route: p.route, icon: icon);
     }).toList();
-    // Determine the active tab index — match exact route or parent route
+    // Determine the active tab index - match exact route or parent route
     // (e.g. "roles/new" matches the "roles" tab).
     var activeIndex = tabs.indexWhere((t) => t.route == widget.page);
     if (activeIndex < 0) {
@@ -437,7 +437,7 @@ class _RfwPageState extends State<RfwPage> {
     final tabIndex = activeIndex >= 0 ? activeIndex : 0;
 
     if (tabs.length <= 1) {
-      // No tabs — just render the page content directly.
+      // No tabs - just render the page content directly.
       return SingleChildScrollView(
         padding: const EdgeInsets.all(Sentin8Spacing.xl),
         child: Column(
@@ -475,7 +475,7 @@ class _RfwPageState extends State<RfwPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Scrollable tab bar — service sub-pages from the module registry.
+          // Scrollable tab bar - service sub-pages from the module registry.
           // isScrollable: true + tabAlignment: startAlign ensures tabs
           // scroll horizontally when they overflow (important for mobile).
           SizedBox(
@@ -563,7 +563,7 @@ class _PaymentSimulatorPlaceholder extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             Text(
-                'Native widget host — interactive payment simulator.\nWill be implemented in story 22.1.6.',
+                'Native widget host - interactive payment simulator.\nWill be implemented in story 22.1.6.',
                 style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.center),
           ],
@@ -590,7 +590,7 @@ class _PostingConsolePlaceholder extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             Text(
-                'Native widget host — real-time posting console.\nWill be implemented in story 22.1.6.',
+                'Native widget host - real-time posting console.\nWill be implemented in story 22.1.6.',
                 style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.center),
           ],
@@ -617,7 +617,7 @@ class _WorkflowVisualizerPlaceholder extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             Text(
-                'Native widget host — workflow step visualizer.\nWill be implemented in story 22.1.6.',
+                'Native widget host - workflow step visualizer.\nWill be implemented in story 22.1.6.',
                 style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.center),
           ],

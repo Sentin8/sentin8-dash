@@ -8,7 +8,7 @@
 // Shows the full value as a read-only monospace box by default. Clicking
 // it switches to edit mode: a TextField for the editable prefix + a
 // non-editable suffix (the org-derived part of the hostname), plus two
-// icon buttons — "Cancel" reverts the current override, "Set to default"
+// icon buttons - "Cancel" reverts the current override, "Set to default"
 // restores the platform default (e.g. `auth` for auth, or the
 // auto-derived slug from the env name).
 //
@@ -44,7 +44,7 @@ class SubdomainFieldController extends ChangeNotifier {
       ? defaultValue
       : controller.text.trim();
 
-  /// Start editing — switches the widget into the TextField mode.
+  /// Start editing - switches the widget into the TextField mode.
   /// Focus management is left to the parent (e.g. by passing a
   /// `FocusNode` to the underlying [TextField] or by explicitly
   /// calling `FocusScope.of(context).requestFocus(...)` in response
@@ -54,7 +54,7 @@ class SubdomainFieldController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Cancel — reverts any in-progress edit back to [defaultValue] and
+  /// Cancel - reverts any in-progress edit back to [defaultValue] and
   /// switches back to read-only mode.
   void cancel() {
     controller.text = defaultValue;
@@ -62,7 +62,7 @@ class SubdomainFieldController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// "Set to default" — like [cancel] but signals that the user
+  /// "Set to default" - like [cancel] but signals that the user
   /// explicitly wants the platform default rather than the auto-derived
   /// value. The parent can use this hook to persist the reset (e.g.
   /// PUT the default back to the server).
@@ -81,7 +81,7 @@ class SubdomainFieldController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Stop editing without reverting — call this from the parent after
+  /// Stop editing without reverting - call this from the parent after
   /// it has saved the value to the server.
   void finishEditing() {
     _editing = false;
@@ -110,7 +110,7 @@ class SubdomainFieldController extends ChangeNotifier {
 /// This is a [StatefulWidget] so it can hold an internal [FocusNode]
 /// for the edit-mode [TextField] and request focus on it the frame
 /// after the widget switches to edit mode. Focus management on
-/// Done/Cancel (where focus should go next) is left to the parent —
+/// Done/Cancel (where focus should go next) is left to the parent  - 
 /// the widget only ensures the edit field itself is focused while
 /// editing, which is the minimal focus behavior the user expects
 /// when they click the edit icon.
@@ -165,7 +165,7 @@ class _ClickableSubdomainFieldState extends State<ClickableSubdomainField> {
   /// Internal FocusNode for the edit-mode TextField. We create and
   /// dispose it here so the widget owns its lifecycle. When the user
   /// clicks the edit icon (triggering `startEditing`), we schedule a
-  /// post-frame callback to request focus on this node — the
+  /// post-frame callback to request focus on this node - the
   /// TextField is mounted by then and accepts focus cleanly.
   late final FocusNode _editFocusNode;
 
@@ -194,7 +194,7 @@ class _ClickableSubdomainFieldState extends State<ClickableSubdomainField> {
   void _onStateChanged() {
     final isEditing = widget.state.isEditing;
     if (isEditing && !_wasEditing) {
-      // Just entered edit mode — request focus on the edit field
+      // Just entered edit mode - request focus on the edit field
       // after the next frame so the TextField is mounted first.
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted && widget.state.isEditing) {
@@ -241,10 +241,10 @@ class _ClickableSubdomainFieldState extends State<ClickableSubdomainField> {
             // The green tick icon commits the edit and switches
             // back to read-only mode WITHOUT reverting the typed
             // value. Focus management on exit is left to the
-            // parent — this widget only ensures the edit field
+            // parent - this widget only ensures the edit field
             // is focused while editing.
             onCancel: state.finishEditing,
-            // Cancel — exits edit mode AND reverts the typed value
+            // Cancel - exits edit mode AND reverts the typed value
             // to the platform default. The "Restore platform default"
             // label only made sense from the read-only view; in edit
             // mode the same action is labelled "Cancel" because the
@@ -272,7 +272,7 @@ class _ClickableSubdomainFieldState extends State<ClickableSubdomainField> {
   }
 }
 
-/// The read-only display — a monospace box showing the full value with
+/// The read-only display - a monospace box showing the full value with
 /// an edit pencil icon. In read-only mode there is also a "set to
 /// default" icon button so the user can quickly reset without entering
 /// edit mode.
@@ -298,7 +298,7 @@ class _ReadOnlyField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          // The text is purely display — NOT a tap target. The edit
+          // The text is purely display - NOT a tap target. The edit
           // pencil icon (right side) is the only entry point into edit
           // mode. This prevents the click-to-edit InkWell from
           // stealing focus from the surrounding form fields (e.g. the
@@ -306,7 +306,7 @@ class _ReadOnlyField extends StatelessWidget {
           // scanning or reading the value. The previous design wrapped
           // the whole text in an InkWell, which caused clicks anywhere
           // on the read-only display to trigger `startEditing` AND
-          // shift focus to the first form field — a confusing UX and a
+          // shift focus to the first form field - a confusing UX and a
           // blocker for automated tests that clicked the read-only text.
           child: Container(
             width: double.infinity,
@@ -337,7 +337,7 @@ class _ReadOnlyField extends StatelessWidget {
         // switches the field into edit mode. Rendered as an
         // IconButton (matching the reset IconButton next to it) so
         // the two affordances have the same hit target, padding,
-        // and tooltip behaviour — keeping the visual rhythm of the
+        // and tooltip behaviour - keeping the visual rhythm of the
         // row consistent.
         IconButton(
           tooltip: 'Edit',
@@ -356,7 +356,7 @@ class _ReadOnlyField extends StatelessWidget {
   }
 }
 
-/// The edit field — TextField for the editable prefix, non-editable
+/// The edit field - TextField for the editable prefix, non-editable
 /// suffix inside the field border, then two icon buttons: "set to
 /// default" and "cancel" (close).
 class _EditField extends StatelessWidget {
@@ -393,7 +393,7 @@ class _EditField extends StatelessWidget {
             valueListenable: controller,
             builder: (context, value, _) {
               return TextField(
-                // Use a STABLE key — do NOT key the TextField on the
+                // Use a STABLE key - do NOT key the TextField on the
                 // controller's value. The previous ValueKey('subdomain-${value.text}')
                 // approach caused the TextField to be rebuilt on every
                 // keystroke (because onChanged fires per character),
@@ -409,7 +409,7 @@ class _EditField extends StatelessWidget {
                 // on it the frame after the widget enters edit mode.
                 // We do NOT use `autofocus: true` here because it
                 // races with the previously-focused element on
-                // Flutter Web CanvasKit — the explicit post-frame
+                // Flutter Web CanvasKit - the explicit post-frame
                 // requestFocus in the State is more reliable.
                 focusNode: focusNode,
                 onChanged: onChanged,
@@ -427,7 +427,7 @@ class _EditField extends StatelessWidget {
           ),
         ),
         const SizedBox(width: Sentin8Spacing.xs),
-        // Cancel — exits edit mode and reverts the typed value to
+        // Cancel - exits edit mode and reverts the typed value to
         // the default. This is the same semantic as before (the
         // resetTooltip/reset IconButton), but labelled "Cancel"
         // because the user's mental model in edit mode is "I want

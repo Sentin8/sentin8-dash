@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Not found page — 404 fallback.
+// Not found page - 404 fallback.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 

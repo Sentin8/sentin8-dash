@@ -107,7 +107,7 @@ class _SettingsContentState extends State<_SettingsContent> {
 
       setState(() => _env = res);
     } catch (e) {
-      // Show the error instead of silently swallowing it — the previous
+      // Show the error instead of silently swallowing it - the previous
       // `catch (_) {}` caused the settings page to render blank when the
       // env fetch failed, with no indication of what went wrong.
       if (mounted) {
@@ -128,7 +128,7 @@ class _SettingsContentState extends State<_SettingsContent> {
           });
       _featureChanges.remove(key);
       // Update the local module list so the toggle reflects the new
-      // state immediately — without this, the button text stays as
+      // state immediately - without this, the button text stays as
       // "Enable X" even after the PUT succeeds because _verticalServices
       // is only loaded once in _load().
       if (mounted) {
@@ -141,7 +141,7 @@ class _SettingsContentState extends State<_SettingsContent> {
         });
       }
       // Notify the AuthProvider so the sidebar (and any other listeners)
-      // immediately pick up the feature change — no page reload needed.
+      // immediately pick up the feature change - no page reload needed.
       AuthProvider.instance.notifyFeatureChange();
     } catch (e) {
       if (mounted) setState(() => _message = 'Error: $e');
@@ -169,7 +169,7 @@ class _SettingsContentState extends State<_SettingsContent> {
             // Dynamic from the module registry (sentin8_vertical_services.admin_ui).
             Text('Services', style: Sentin8Text.h2),
             const SizedBox(height: Sentin8Spacing.md),
-            // Only vertical services are listed here — Sentin8 core
+            // Only vertical services are listed here - Sentin8 core
             // platform services (auth, app, bus, cron, db, flow, func,
             // post, stat, storage, acme) are always-on and not toggleable.
             ..._verticalServices
@@ -184,7 +184,7 @@ class _SettingsContentState extends State<_SettingsContent> {
               return _FeatureCard(
                 name: m.serviceFlag,
                 displayName: displayLabel,
-                description: '${m.pages.length} admin pages — ${m.serviceFlag}',
+                description: '${m.pages.length} admin pages - ${m.serviceFlag}',
                 icon: iconForName(m.icon),
                 enabled: m.enabled,
                 locked: false,
@@ -360,7 +360,7 @@ class _FeatureCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: Sentin8Spacing.md),
-                // Use a tappable button instead of a Switch — Flutter CanvasKit
+                // Use a tappable button instead of a Switch - Flutter CanvasKit
                 // Switch widgets don't respond to Playwright mouse events in E2E
                 // tests. The button has role="button" in semantics, which
                 // clickFlutterButton can find and click.

@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Branding pages — hierarchical branding management.
+// Branding pages - hierarchical branding management.
 // Routes: /org/{orgId}/branding                     → org branding
 //         /org/{orgId}/env/{envId}/branding            → env branding
 //         /org/{orgId}/auth/branding                → org Auth (Staff) branding
@@ -16,7 +16,7 @@ import '../theme.dart';
 import '../auth_provider.dart';
 import 'nav_shell.dart';
 
-/// Org-level branding page — branding for the entire organization.
+/// Org-level branding page - branding for the entire organization.
 class OrgBrandingPage extends StatelessWidget {
   final String orgId;
   const OrgBrandingPage({super.key, required this.orgId});
@@ -32,7 +32,7 @@ class OrgBrandingPage extends StatelessWidget {
   }
 }
 
-/// Env-level branding page — branding for a specific environment.
+/// Env-level branding page - branding for a specific environment.
 /// Extends org branding; env fields override org fields when set.
 class BrandingPage extends StatelessWidget {
   final String orgId;
@@ -50,7 +50,7 @@ class BrandingPage extends StatelessWidget {
   }
 }
 
-/// Branding form widget — loads, edits, and saves branding for a given
+/// Branding form widget - loads, edits, and saves branding for a given
 /// org/env/scope. Shows a "Preview (Merged)" section that displays the
 /// effective branding after merging all levels.
 class _BrandingForm extends StatefulWidget {
@@ -175,7 +175,7 @@ class _BrandingFormState extends State<_BrandingForm> {
           Text('Branding', style: Sentin8Text.h1),
           const SizedBox(height: Sentin8Spacing.sm),
           Text(
-            'Scope: ${_scopeLabel(widget.scope)} — fields set here override the parent level.',
+            'Scope: ${_scopeLabel(widget.scope)} - fields set here override the parent level.',
             style: Sentin8Text.bodySecondary,
           ),
           const SizedBox(height: Sentin8Spacing.lg),
@@ -360,7 +360,7 @@ class _MergedPreview extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: fields.map((f) {
-          final val = merged[f] as String? ?? '—';
+          final val = merged[f] as String? ?? ' - ';
           return Padding(
             padding: const EdgeInsets.only(bottom: Sentin8Spacing.sm),
             child: Row(

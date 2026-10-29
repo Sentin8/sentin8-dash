@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Dash app shell — `DashApp` widget (Story 13.1.1, second half).
+// Dash app shell - `DashApp` widget (Story 13.1.1, second half).
 //
 // Wraps the router with providers and the Sentin8 theme. Apps that already have
 // a `main.dart` with `DashApp` defined can keep using it; this file exposes

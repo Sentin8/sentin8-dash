@@ -122,7 +122,7 @@ class DashRouter {
         // Service/page parameters are resolved from the admin_ui registry
         // in sentin8_vertical_services (populated by sentin8-cli vertical enroll).
 
-        // Platform-scoped services (e.g. /log, /post) — sys realm.
+        // Platform-scoped services (e.g. /log, /post) - sys realm.
         GoRoute(
           path: '/:service/:page',
           builder: (context, state) {

@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Material icon lookup — code point based, no mapping needed.
+// Material icon lookup - code point based, no mapping needed.
 //
 // Flutter's IconData is just an int code point into the MaterialIcons font.
 // In vertical-registry.json, use the icon's code point:

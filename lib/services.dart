@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8 API service layer — HTTP clients for all Sentin8 backend services.
+// Sentin8 API service layer - HTTP clients for all Sentin8 backend services.
 // Dash calls services directly (not through Sys) per the design doc §4.4.
 import 'dart:convert';
 import 'dart:js_interop';
@@ -60,7 +60,7 @@ class ApiClient {
             sessionCorrelationId, // SDK8 §3.9 observability
         if (authToken != null) 'authorization': 'Bearer $authToken',
         if (csrfToken != null) 'X-BFF-CSRF': csrfToken!,
-        // For env-scoped requests (targetEnvId set), only send target_env_id —
+        // For env-scoped requests (targetEnvId set), only send target_env_id  - 
         // org_id is resolved server-side from env_id. For org-scoped requests
         // (targetOrgId set, no targetEnvId), send target_org_id.
         if (targetEnvId != null && targetEnvId!.isNotEmpty)
@@ -76,7 +76,7 @@ class ApiClient {
     // doesn't explicitly allow the header).
     //
     // For env-scoped requests (targetEnvId set), only target_env_id is
-    // sent — org_id is resolved server-side from env_id via
+    // sent - org_id is resolved server-side from env_id via
     // sentin8_sys_environments (env_id is globally unique).
     // For org-scoped requests (targetOrgId set, no targetEnvId),
     // target_org_id is sent.
@@ -242,11 +242,11 @@ class ApiClient {
           body = decoded;
           message = body['message'] as String? ?? message;
         } else {
-          // JSON but not a map — use the raw text as the message.
+          // JSON but not a map - use the raw text as the message.
           message = raw;
         }
       } on FormatException {
-        // Not JSON — treat the raw text as the error message.
+        // Not JSON - treat the raw text as the error message.
         message = raw;
       }
       throw ApiException(response.status, message, body);
@@ -280,7 +280,7 @@ class ApiException implements Exception {
 /// [targetOrgId] is sent as X-BFF-Target-Org-Id header for **org-scoped**
 /// requests only (no env). [targetEnvId] is sent as X-BFF-Target-Env-Id
 /// header for **env-scoped** requests. When both are present, only
-/// target_env_id is sent — the BFF and backend resolve org_id from env_id
+/// target_env_id is sent - the BFF and backend resolve org_id from env_id
 /// via sentin8_sys_environments (env_id is globally unique).
 /// These are BFF-internal input parameters (never forwarded upstream) that
 /// tell BFF which org/env to exchange the sys-realm token for via RFC 8693
@@ -322,7 +322,7 @@ class Sentin8Services {
       'https://$service.$domain';
 
   /// Creates a copy of this Sentin8Services with the given target org/env IDs.
-  /// For env-scoped requests, pass only [targetEnvId] — the BFF resolves
+  /// For env-scoped requests, pass only [targetEnvId] - the BFF resolves
   /// org_id from env_id via sentin8_sys_environments (env_id is globally
   /// unique). For org-scoped requests, pass only [targetOrgId].
   /// When the BFF proxy sees the target header on a sys-realm request,

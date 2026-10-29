@@ -3,9 +3,9 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8 Dash — Test bridge for e2e automation.
+// Sentin8 Dash - Test bridge for e2e automation.
 //
-// E2e tests interact with the app ONLY through the UI — clicking
+// E2e tests interact with the app ONLY through the UI - clicking
 // buttons, typing into fields, and calling these test bridge functions
 // which trigger the same Flutter widget code as clicking the submit
 // button. No direct API/fetch calls are made from the test.
@@ -32,11 +32,11 @@ void Function(
 ])?
     _createListingHandler;
 
-// Last created listing ID — set by AppStorePage after _createListing()
+// Last created listing ID - set by AppStorePage after _createListing()
 // completes. Read by e2e tests via window.sentin8TestLastListingId.
 String? _lastListingId;
 
-// Last route name the Navigator generated — set by main.dart's
+// Last route name the Navigator generated - set by main.dart's
 // _generateRoute. Read by e2e tests via window.sentin8TestGetLastRoute:
 // the authoritative view of which page the app is actually showing
 // (the browser URL can lag the Navigator on programmatic pushes).

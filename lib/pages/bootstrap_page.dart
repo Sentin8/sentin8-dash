@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Bootstrap page — resolves user memberships and redirects.
+// Bootstrap page - resolves user memberships and redirects.
 import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
@@ -43,7 +43,7 @@ class _BootstrapPageState extends State<BootstrapPage> {
 
   Future<void> _bootstrap() async {
     final auth = AuthProvider.instance;
-    // Initialize — fetches the BFF session (cookie sent automatically).
+    // Initialize - fetches the BFF session (cookie sent automatically).
     await auth.init();
     if (!mounted) return;
     if (!auth.isAuthenticated) {
@@ -57,7 +57,7 @@ class _BootstrapPageState extends State<BootstrapPage> {
       final res = await auth.services!.sys.get('/v1/bootstrap');
       final memberships = res['memberships'] as List<dynamic>? ?? [];
       if (!mounted) return;
-      // Navigate directly — addPostFrameCallback is unreliable in Flutter web.
+      // Navigate directly - addPostFrameCallback is unreliable in Flutter web.
       // If there's a deep link (initial URL was not / or /bootstrap), preserve it.
       if (_initialPath.isNotEmpty) {
         Navigator.pushReplacementNamed(context, _initialPath);

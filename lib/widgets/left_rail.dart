@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// LeftRail — Dash left navigation rail (Story 13.1.3).
+// LeftRail - Dash left navigation rail (Story 13.1.3).
 //
 // Contains the Sentin8 logo, feature-area navigation, user menu, and the
 // organization/environment selector. Rendered as the start drawer of the

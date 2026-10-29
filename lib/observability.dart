@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Dash observability — structured logging, metrics, traces, alerts.
+// Dash observability - structured logging, metrics, traces, alerts.
 //
 // All logs carry correlation IDs for traceability across the Flutter → BFF →
 // Rust service boundary. Correlation IDs are generated on the Flutter side and
@@ -32,7 +32,7 @@ import 'dart:math';
 /// echoes it on every log line in the request's downstream path.
 ///
 /// To track a sub-flow within a session (e.g. "create org" → "create env"),
-/// callers can pass an explicit [correlationId] to API helpers — the default
+/// callers can pass an explicit [correlationId] to API helpers - the default
 /// behaviour reuses the session-level ID.
 String _sessionCorrelationId = _newCorrelationId();
 

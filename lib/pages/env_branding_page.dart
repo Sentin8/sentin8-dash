@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Environment branding — `/org/{orgId}/env/{envId}/branding` (Story 13.1.14).
+// Environment branding - `/org/{orgId}/env/{envId}/branding` (Story 13.1.14).
 //
 // Logo URL, logo icon URL, primary color, accent color, font family, theme
 // mode, custom CSS. Overrides org branding per-field.

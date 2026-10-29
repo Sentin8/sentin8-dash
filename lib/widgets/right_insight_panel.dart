@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// RightInsightPanel — Dash right insight rail (Story 13.1.4).
+// RightInsightPanel - Dash right insight rail (Story 13.1.4).
 //
 // Shows AI suggestions, operational alerts, and a recent audit-event feed.
 // Rendered as the end drawer of the main Scaffold in the authenticated shell.

@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8 Design System — Theme tokens for Dash.
+// Sentin8 Design System - Theme tokens for Dash.
 // Implements the design system defined in design/sentin8-design-system.md.
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,7 +41,7 @@ class Sentin8Colors {
 
 /// Sentin8 typography scale.
 class Sentin8Text {
-  /// Page titles — uses the same font as the Sentin8 logo (Rock Salt).
+  /// Page titles - uses the same font as the Sentin8 logo (Rock Salt).
   static TextStyle get h1 => GoogleFonts.quicksand(
         fontSize: 28,
         fontWeight: FontWeight.w400,
@@ -201,7 +201,7 @@ ThemeData sentin8Theme() {
   );
 }
 
-/// A glass panel container — the primary surface element.
+/// A glass panel container - the primary surface element.
 class GlassPanel extends StatelessWidget {
   final Widget child;
   final EdgeInsets? padding;

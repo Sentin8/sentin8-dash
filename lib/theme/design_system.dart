@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8 Design System — colors, typography, glass panels, buttons, inputs,
+// Sentin8 Design System - colors, typography, glass panels, buttons, inputs,
 // tables, badges (Story 13.1.2).
 //
 // Token-based design system used by Dash pages. Mirrors the tokens in

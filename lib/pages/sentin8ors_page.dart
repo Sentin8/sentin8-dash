@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8ors page — list, invite, manage roles.
+// Sentin8ors page - list, invite, manage roles.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../auth_provider.dart';

@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Create organization page — form for creating a new Sentin8 organization.
+// Create organization page - form for creating a new Sentin8 organization.
 // The slug is auto-generated from the organization name and the user can
 // edit it inline. The org domain is pre-filled with the platform default
 // (`{slug}.{sentin8_domain}`) and the user can override it. TLS uses
@@ -136,7 +136,7 @@ class _CreateOrganizationPageState extends State<CreateOrganizationPage> {
     setState(() {});
   }
 
-  /// Debounced slug availability check — calls Sys to see if the slug
+  /// Debounced slug availability check - calls Sys to see if the slug
   /// is already taken by an existing organization.
   void _checkSlugAvailability(String slug) {
     _slugCheckTimer?.cancel();
@@ -173,7 +173,7 @@ class _CreateOrganizationPageState extends State<CreateOrganizationPage> {
     setState(() { _loading = true; _error = null; });
     try {
       final auth = AuthProvider.instance;
-      // Always send a domain — fall back to the platform default
+      // Always send a domain - fall back to the platform default
       // (`{slug}.{sentin8_domain}`) if the user cleared the field.
       final customDomain = _domainCtrl.text.trim().isNotEmpty
           ? _domainCtrl.text.trim()
@@ -207,7 +207,7 @@ class _CreateOrganizationPageState extends State<CreateOrganizationPage> {
 
   @override
   Widget build(BuildContext context) {
-    // The org domain has no fixed suffix — it's a single label the
+    // The org domain has no fixed suffix - it's a single label the
     // user can fully override. Pass `null` suffix so the edit field
     // shows the textbox alone (no `{orgDomain}` to the right).
     return DashShell(

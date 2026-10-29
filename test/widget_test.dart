@@ -7,12 +7,12 @@
 //
 // The app and its SDK are web-coupled (`package:web` / `dart:js_interop`
 // in `auth_provider`, `bff_ws`, `services`, `test_bridge` and the sentin8
-// Flutter SDK), so this runs on the chrome platform — `make test-flutter`
+// Flutter SDK), so this runs on the chrome platform - `make test-flutter`
 // passes `--platform chrome` (see Makefile).
 //
 // `DashApp.initState` kicks off `AuthProvider.init()` which fetches the
 // BFF session; with no BFF reachable under the test harness that fails and
-// falls back to a loaded-but-signed-out state — the expected path. The
+// falls back to a loaded-but-signed-out state - the expected path. The
 // smoke assertion is that the app shell builds and shows the sign-in
 // route shell.
 

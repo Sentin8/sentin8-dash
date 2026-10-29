@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Organization home page — shows environments for an organization.
+// Organization home page - shows environments for an organization.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../auth_provider.dart';
@@ -54,7 +54,7 @@ class _OrganizationHomePageState extends State<OrganizationHomePage> {
       await auth.ready;
       // Identity-cache invalidation race (policy design §3.1d-1): right
       // after org creation the services may still hold the caller's cached
-      // pre-grant identity — sys answers 403 until the invalidation event
+      // pre-grant identity - sys answers 403 until the invalidation event
       // propagates (observed up to ~1.6s; bounded by the 30s resolver
       // TTL). Retry with a backoff budget comfortably above that window.
       Map<String, dynamic>? orgRes;
@@ -105,7 +105,7 @@ class _OrganizationHomePageState extends State<OrganizationHomePage> {
       );
     }
     if (_envs!.isEmpty) {
-      // No environments — show create CTA
+      // No environments - show create CTA
       return DashShell(
         orgId: widget.orgId,
         envId: '',

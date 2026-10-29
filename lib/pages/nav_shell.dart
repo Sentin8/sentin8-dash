@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Sentin8:Dash
 // SPDX-License-Identifier: Apache-2.0
 
-// Sentin8 Dash navigation shell — left rail with feature nav and breadcrumb header.
+// Sentin8 Dash navigation shell - left rail with feature nav and breadcrumb header.
 //
 // The sidebar is dynamic: it highlights the active item based on the current
 // route, auto-expands parent items whose children match the current route.
@@ -45,7 +45,7 @@ class NavItem {
       required this.route,
       this.children});
 
-  /// Exact route match — used for active highlighting so only the
+  /// Exact route match - used for active highlighting so only the
   /// deepest/last visible nav item is highlighted, not its parents.
   bool isActiveRoute(String currentRoute) => currentRoute == route;
 
@@ -128,7 +128,7 @@ class _DashShellState extends State<DashShell> {
       // Load registered module services (admin_ui discovery) from Sys.
       // This returns all registered vertical + platform services with their
       // admin_ui page definitions, filtered by feature enablement.
-      // For env-scoped routes, only env_id is passed — org_id is resolved
+      // For env-scoped routes, only env_id is passed - org_id is resolved
       // server-side from env_id (env_id is globally unique).
       // For org-scoped routes, only org_id is passed.
       final envParam = widget.envId.isNotEmpty ? '?env_id=${widget.envId}' : '';
@@ -165,7 +165,7 @@ class _DashShellState extends State<DashShell> {
 
   Future<void> _loadNames() async {
     final auth = AuthProvider.instance;
-    // For env-scoped routes, orgId may be empty — we resolve org_id
+    // For env-scoped routes, orgId may be empty - we resolve org_id
     // from the env response (env_id is globally unique).
     // For org-scoped routes, orgId is from the URL.
 
@@ -210,7 +210,7 @@ class _DashShellState extends State<DashShell> {
         if (mounted) setState(() => _envName = widget.envId);
       }
     } else if (widget.orgId.isNotEmpty) {
-      // Org-scoped route — fetch org display name + slug from Sys.
+      // Org-scoped route - fetch org display name + slug from Sys.
       try {
         final orgRes = await auth.services!.sys.get('/v1/org/${widget.orgId}');
         if (mounted) {
@@ -224,7 +224,7 @@ class _DashShellState extends State<DashShell> {
         if (mounted) setState(() => _orgName = widget.orgId);
       }
     }
-    // Load module services for dynamic sidebar — works at both org and env
+    // Load module services for dynamic sidebar - works at both org and env
     // scope. At org scope, env_id is omitted so the sys handler returns
     // features with org-level enablement (platform services default on).
     _reloadServices();
@@ -298,14 +298,14 @@ class _DashShellState extends State<DashShell> {
       NavItem(label: 'Sentin8ors', icon: Icons.people_outlined, route: '/sentin8ors?org=${widget.orgId}'),
       NavItem(label: 'Settings', icon: Icons.settings_outlined, route: '/settings?org=${widget.orgId}'),
       NavItem(label: 'Branding', icon: Icons.palette_outlined, route: '/branding?org=${widget.orgId}'),
-      // ── Dynamic module services (RFW — discovered at runtime) ──────────
-      // Services are env-scoped — no dynamic service nav at org level.
+      // ── Dynamic module services (RFW - discovered at runtime) ──────────
+      // Services are env-scoped - no dynamic service nav at org level.
     ];
   }
 
   /// Build dynamic nav items from the module services registry.
   /// Routes use query params: /{service}/{page}?env={envId} (env-scoped).
-  /// All services are env-scoped — there are no org-scoped service routes.
+  /// All services are env-scoped - there are no org-scoped service routes.
   List<NavItem> _buildDynamicServiceNav(String orgId, String envId) {
     if (envId.isEmpty) return [];
     final scopeParams = '?env=$envId';
@@ -353,7 +353,7 @@ class _DashShellState extends State<DashShell> {
       NavItem(label: 'Settings', icon: Icons.settings_outlined, route: '/settings?env=${widget.envId}'),
       NavItem(label: 'Branding', icon: Icons.palette_outlined, route: '/branding?env=${widget.envId}'),
       NavItem(label: 'Audit', icon: Icons.history_outlined, route: '/audit?env=${widget.envId}'),
-      // ── Dynamic module services (RFW — discovered at runtime) ──────────
+      // ── Dynamic module services (RFW - discovered at runtime) ──────────
       ..._buildDynamicServiceNav(widget.orgId, widget.envId),
       if (widget.extraNav != null) ...widget.extraNav!,
     ];
@@ -398,7 +398,7 @@ class _DashShellState extends State<DashShell> {
             ),
             child: Column(
               children: [
-                // Logo — click to toggle rail
+                // Logo - click to toggle rail
                 GestureDetector(
                   onTap: _toggleRail,
                   child: Container(
@@ -455,11 +455,11 @@ class _DashShellState extends State<DashShell> {
               ],
             ),
           ),
-          // Main content — header bar + page content.
+          // Main content - header bar + page content.
           Expanded(
             child: Column(
               children: [
-                // Org:Env:Service header bar — clickable breadcrumbs with icons.
+                // Org:Env:Service header bar - clickable breadcrumbs with icons.
                 if (!widget.platformScoped && _orgName.isNotEmpty)
                   _HeaderBar(
                     orgId: widget.orgId,
@@ -472,7 +472,7 @@ class _DashShellState extends State<DashShell> {
                     currentRoute: currentRoute,
                     verticalServices: _verticalServices,
                   ),
-                // Scope tabs — only on native org/env pages, not RFW service
+                // Scope tabs - only on native org/env pages, not RFW service
                 // pages (which have their own service-level tab bar).
                 if (!widget.platformScoped && _orgName.isNotEmpty && !_isRfwServicePage(currentRoute))
                   _ScopeTabs(
@@ -530,7 +530,7 @@ class _NavTreeState extends State<_NavTree> {
 
   Widget _buildItem(NavItem item, int depth) {
     final hasChildren = item.children != null && item.children!.isNotEmpty;
-    // Exact match — only the deepest visible item is highlighted.
+    // Exact match - only the deepest visible item is highlighted.
     final isActive = item.isActiveRoute(widget.currentRoute);
     final shouldExpand = hasChildren &&
         (item.matchesDeep(widget.currentRoute) ||
@@ -894,7 +894,7 @@ class _ScopeTabs extends StatelessWidget {
         : (orgName.isNotEmpty ? orgName : 'Organization');
     final firstIcon = isEnvScoped ? Icons.layers_outlined : Icons.business_outlined;
 
-    // No org-scoped service tabs — auth and storage are env-scoped only.
+    // No org-scoped service tabs - auth and storage are env-scoped only.
     // For env-scoped routes, only ?env= is used (org_id resolved server-side).
     final scopeParams = isEnvScoped
         ? '?env=$envId'

@@ -314,7 +314,7 @@ class _DashShellState extends State<DashShell> {
         .map((m) {
       final firstPage = m.pages.isNotEmpty ? m.pages.first.route : 'overview';
       final serviceRoute = '/${m.service}/$firstPage$scopeParams';
-      // Derive module-prefixed label (e.g. "Bank8:FDX" from "bank8:fdx").
+      // Derive module-prefixed label (e.g. "OpenFin8:CA" from "openfin8:ca").
       // Colon identity (architecture-principles.md §6.0) with legacy
       // hyphen fallback.
       final modPrefix = m.service.split(':').first.split('-').first;

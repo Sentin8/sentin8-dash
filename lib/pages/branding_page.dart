@@ -70,6 +70,8 @@ class _BrandingFormState extends State<_BrandingForm> {
   final _accentColorCtrl = TextEditingController();
   final _fontFamilyCtrl = TextEditingController();
   final _customCssCtrl = TextEditingController();
+  final _privacyUrlCtrl = TextEditingController();
+  final _termsUrlCtrl = TextEditingController();
   String _themeMode = ''; // 'light', 'dark', or '' (default)
   Map<String, dynamic>? _merged;
   String? _message;
@@ -107,6 +109,8 @@ class _BrandingFormState extends State<_BrandingForm> {
         _fontFamilyCtrl.text = res['font_family'] as String? ?? '';
         _themeMode = res['theme_mode'] as String? ?? '';
         _customCssCtrl.text = res['custom_css'] as String? ?? '';
+        _privacyUrlCtrl.text = res['privacy_url'] as String? ?? '';
+        _termsUrlCtrl.text = res['terms_url'] as String? ?? '';
         setState(() => _loading = false);
       }
       // Load merged branding preview (only for env-scoped pages).
@@ -135,6 +139,8 @@ class _BrandingFormState extends State<_BrandingForm> {
         'font_family': _fontFamilyCtrl.text,
         'theme_mode': _themeMode,
         'custom_css': _customCssCtrl.text,
+        'privacy_url': _privacyUrlCtrl.text,
+        'terms_url': _termsUrlCtrl.text,
       });
       if (mounted) setState(() => _message = 'Saved');
       // Reload merged preview.
@@ -159,6 +165,8 @@ class _BrandingFormState extends State<_BrandingForm> {
     _accentColorCtrl.dispose();
     _fontFamilyCtrl.dispose();
     _customCssCtrl.dispose();
+    _privacyUrlCtrl.dispose();
+    _termsUrlCtrl.dispose();
     super.dispose();
   }
 
@@ -319,6 +327,36 @@ class _BrandingFormState extends State<_BrandingForm> {
               maxLines: 5,
             ),
           ),
+          const SizedBox(height: Sentin8Spacing.md),
+
+          // Privacy policy link (hosted-UI footer; empty inherits the
+          // parent level / platform default)
+          SizedBox(
+            width: 500,
+            child: TextField(
+              controller: _privacyUrlCtrl,
+              decoration: const InputDecoration(
+                labelText: 'Privacy Policy URL',
+                hintText: 'https://example.com/privacy (empty = inherit)',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          const SizedBox(height: Sentin8Spacing.md),
+
+          // Terms of service link (hosted-UI footer; empty inherits the
+          // parent level / platform default)
+          SizedBox(
+            width: 500,
+            child: TextField(
+              controller: _termsUrlCtrl,
+              decoration: const InputDecoration(
+                labelText: 'Terms of Service URL',
+                hintText: 'https://example.com/terms (empty = inherit)',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
           const SizedBox(height: Sentin8Spacing.lg),
 
           // Save button
@@ -354,7 +392,7 @@ class _MergedPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fields = ['logoUrl', 'logoIconUrl', 'primaryColor', 'accentColor', 'fontFamily', 'themeMode', 'customCss'];
+    final fields = ['logoUrl', 'logoIconUrl', 'primaryColor', 'accentColor', 'fontFamily', 'themeMode', 'customCss', 'privacyUrl', 'termsUrl'];
     return GlassPanel(
       padding: const EdgeInsets.all(Sentin8Spacing.lg),
       child: Column(

@@ -30,6 +30,8 @@ class _EnvBrandingPageState extends State<EnvBrandingPage> {
   final _accentColorCtrl = TextEditingController();
   final _fontFamilyCtrl = TextEditingController();
   final _customCssCtrl = TextEditingController();
+  final _privacyUrlCtrl = TextEditingController();
+  final _termsUrlCtrl = TextEditingController();
   String _themeMode = 'light';
   bool _loading = true;
   String? _message;
@@ -51,6 +53,8 @@ class _EnvBrandingPageState extends State<EnvBrandingPage> {
         _accentColorCtrl.text = res['accent_color'] as String? ?? '';
         _fontFamilyCtrl.text = res['font_family'] as String? ?? '';
         _customCssCtrl.text = res['custom_css'] as String? ?? '';
+        _privacyUrlCtrl.text = res['privacy_url'] as String? ?? '';
+        _termsUrlCtrl.text = res['terms_url'] as String? ?? '';
         _themeMode = res['theme_mode'] as String? ?? 'light';
         if (_themeMode.isEmpty) _themeMode = 'light';
         setState(() => _loading = false);
@@ -72,6 +76,8 @@ class _EnvBrandingPageState extends State<EnvBrandingPage> {
         'font_family': _fontFamilyCtrl.text,
         'theme_mode': _themeMode,
         'custom_css': _customCssCtrl.text,
+        'privacy_url': _privacyUrlCtrl.text,
+        'terms_url': _termsUrlCtrl.text,
       });
       if (mounted) setState(() => _message = 'Saved');
     } catch (e) {
@@ -87,6 +93,8 @@ class _EnvBrandingPageState extends State<EnvBrandingPage> {
     _accentColorCtrl.dispose();
     _fontFamilyCtrl.dispose();
     _customCssCtrl.dispose();
+    _privacyUrlCtrl.dispose();
+    _termsUrlCtrl.dispose();
     super.dispose();
   }
 
@@ -132,6 +140,10 @@ class _EnvBrandingPageState extends State<EnvBrandingPage> {
                           ],
                           onChanged: (v) => setState(() => _themeMode = v ?? 'light'),
                         ),
+                        const SizedBox(height: Sentin8DesignTokens.space3),
+                        Sentin8Input(label: 'Privacy Policy URL', controller: _privacyUrlCtrl),
+                        const SizedBox(height: Sentin8DesignTokens.space3),
+                        Sentin8Input(label: 'Terms of Service URL', controller: _termsUrlCtrl),
                         const SizedBox(height: Sentin8DesignTokens.space3),
                         Sentin8Input(label: 'Custom CSS', controller: _customCssCtrl),
                         const SizedBox(height: Sentin8DesignTokens.space4),
